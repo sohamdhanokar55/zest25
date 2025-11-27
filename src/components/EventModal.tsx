@@ -11,6 +11,11 @@ import {
   Minus,
 } from "lucide-react";
 import { Event } from "../types/Event";
+import {
+  createOrder,
+  loadRazorpay,
+  RazorpaySuccessResponse,
+} from "../utils/razorpay";
 
 interface EventModalProps {
   event: Event | null;
@@ -107,7 +112,7 @@ const EVENT_PRICING_CONFIG: Record<
   },
   chess: {
     type: "fixed",
-    fixed: 100,
+    fixed: 1,
   },
   bgmi: {
     type: "bgmi",
@@ -208,8 +213,7 @@ const EventModal = ({ event, isOpen, onClose }: EventModalProps) => {
 
   const totalFee = calculateTotalFee();
 
-  const handlePayNow = () => {
-    // Handle payment logic here
+  const handlePayNow = async () => {
     let paymentDetails = "";
 
     switch (config.type) {
@@ -233,8 +237,43 @@ const EventModal = ({ event, isOpen, onClose }: EventModalProps) => {
         break;
     }
 
-    console.log(`Proceeding to payment for ${event.name}: ${paymentDetails}`);
-    // You can add payment integration here
+    try {
+      await loadRazorpay();
+      const order = await createOrder(totalFee);
+      const key = import.meta.env.VITE_RAZORPAY_KEY_ID;
+
+      if (!key) {
+        throw new Error("Razorpay key is not configured");
+      }
+
+      if (!window.Razorpay) {
+        throw new Error("Razorpay SDK failed to load");
+      }
+
+      const options = {
+        key,
+        amount: order.amount,
+        currency: order.currency,
+        name: event.name,
+        description: paymentDetails,
+        order_id: order.order_id,
+        handler: (response: RazorpaySuccessResponse) => {
+          alert("Payment success!");
+          console.log("Razorpay payment successful", {
+            razorpay_payment_id: response.razorpay_payment_id,
+            razorpay_signature: response.razorpay_signature,
+          });
+        },
+        theme: {
+          color: "#f97316",
+        },
+      };
+
+      const razorpayInstance = new window.Razorpay(options);
+      razorpayInstance.open();
+    } catch (error) {
+      console.error("Failed to initialize payment", error);
+    }
   };
 
   const handleIncrement = () => {
