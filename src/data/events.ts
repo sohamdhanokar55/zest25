@@ -1,0 +1,319 @@
+import { Event } from '../types/Event';
+
+export const events: Event[] = [
+  {
+    id: 'football',
+    name: 'Football',
+    category: 'Outdoor',
+    day: 'Day 1 - 22nd December',
+    venue: 'Main Football Ground',
+    entryFee: '₹500 per team',
+    reportingTime: '9:00 AM',
+    duration: '90 minutes per match',
+    teamSize: '11 players + 3 substitutes',
+    icon: '⚽',
+    rules: [
+      'Teams must consist of 11 players with a maximum of 3 substitutes',
+      'Standard FIFA rules apply',
+      'Match duration: 2 halves of 45 minutes each',
+      'Rolling substitutions allowed',
+      'Yellow and red card system in effect',
+      'Proper football boots and shin guards mandatory',
+      'All players must carry valid college ID',
+      'Team captain must attend pre-match briefing'
+    ]
+  },
+  {
+    id: 'kabaddi',
+    name: 'Kabaddi',
+    category: 'Outdoor',
+    day: 'Day 1 - 22nd December',
+    venue: 'Sports Complex Arena',
+    entryFee: '₹400 per team',
+    reportingTime: '10:00 AM',
+    duration: '40 minutes per match',
+    teamSize: '7 players + 5 substitutes',
+    icon: '🤼',
+    rules: [
+      'Teams consist of 7 players with maximum 5 substitutes',
+      'Standard Pro Kabaddi rules apply',
+      'Match duration: 2 halves of 20 minutes each',
+      'Do-or-Die raids after 5 consecutive empty raids',
+      'Super Tackle and Super Raid points applicable',
+      'All players must wear appropriate sports attire',
+      'Valid college ID card is mandatory',
+      'Captains must report 15 minutes before match time'
+    ]
+  },
+  {
+    id: 'basketball',
+    name: 'Basketball',
+    category: 'Outdoor',
+    day: 'Day 1 - 22nd December',
+    venue: 'Basketball Court',
+    entryFee: '₹400 per team',
+    reportingTime: '11:00 AM',
+    duration: '48 minutes per match',
+    teamSize: '5 players + 3 substitutes',
+    icon: '🏀',
+    rules: [
+      'Teams consist of 5 players with maximum 3 substitutes',
+      'FIBA rules apply',
+      'Match duration: 4 quarters of 12 minutes each',
+      '24-second shot clock rule',
+      'Personal fouls limit: 5 per player',
+      'Team fouls reset each quarter',
+      'Proper basketball shoes mandatory',
+      'Valid student ID required for all participants'
+    ]
+  },
+  {
+    id: 'badminton',
+    name: 'Badminton',
+    category: 'Indoor',
+    day: 'Day 2 - 23rd December',
+    venue: 'Indoor Sports Hall',
+    entryFee: '₹200 per team',
+    reportingTime: '9:00 AM',
+    duration: 'Best of 3 games',
+    teamSize: 'Singles & Doubles events',
+    icon: '🏸',
+    rules: [
+      'Singles and doubles categories available',
+      'BWF rules apply',
+      'Best of 3 games to 21 points',
+      'Rally scoring system',
+      '2-point lead required to win game',
+      'Players must bring their own rackets',
+      'Non-marking shoes mandatory',
+      'Valid college ID required'
+    ]
+  },
+  {
+    id: 'volleyball',
+    name: 'Volleyball',
+    category: 'Outdoor',
+    day: 'Day 2 - 23rd December',
+    venue: 'Volleyball Court',
+    entryFee: '₹400 per team',
+    reportingTime: '10:00 AM',
+    duration: 'Best of 5 sets',
+    teamSize: '6 players + 3 substitutes',
+    icon: '🏐',
+    rules: [
+      'Teams consist of 6 players with maximum 3 substitutes',
+      'FIVB rules apply',
+      'Best of 5 sets to 25 points (5th set to 15 points)',
+      '2-point lead required to win set',
+      'Rally scoring system',
+      'Maximum 3 touches per side',
+      'Rotation rule strictly enforced',
+      'Proper sports shoes mandatory'
+    ]
+  },
+  {
+    id: 'cricket',
+    name: 'Cricket',
+    category: 'Outdoor',
+    day: 'Day 2 - 23rd December',
+    venue: 'Cricket Ground',
+    entryFee: '₹600 per team',
+    reportingTime: '11:00 AM',
+    duration: '15 overs per side',
+    teamSize: '11 players + 3 substitutes',
+    icon: '🏏',
+    rules: [
+      'Teams consist of 11 players with maximum 3 substitutes',
+      'T20 format: 15 overs per innings',
+      'Powerplay: First 4 overs (max 2 fielders outside 30-yard circle)',
+      'Maximum 3 overs per bowler',
+      'Wide ball and no-ball rules as per ICC',
+      'DRS not available',
+      'Teams must wear matching colored clothing',
+      'Valid college ID mandatory for all players'
+    ]
+  },
+  {
+    id: 'athletics',
+    name: 'Athletics',
+    category: 'Outdoor',
+    venue: 'Athletic Track',
+    entryFee: '₹100 per participant',
+    reportingTime: '8:00 AM',
+    teamSize: 'Individual events',
+    icon: '🏃',
+    rules: [
+      'Individual participation only',
+      'Events: 100m, 200m, 400m, 800m, Long Jump, High Jump',
+      'Maximum 2 events per participant',
+      'Standard IAAF rules apply',
+      'Participants must wear proper running shoes',
+      'Spikes allowed for track events',
+      'All participants must report for warmup 30 minutes early',
+      'Valid college ID mandatory'
+    ]
+  },
+  {
+    id: 'carrom',
+    name: 'Carrom',
+    category: 'Indoor',
+    venue: 'Recreation Hall',
+    entryFee: '₹100 per team',
+    reportingTime: '2:00 PM',
+    teamSize: 'Singles & Doubles',
+    icon: '🎯',
+    rules: [
+      'Singles and doubles categories available',
+      'International Carrom Federation rules apply',
+      'Best of 3 boards',
+      '29 points per board',
+      'Queen must be covered',
+      'Time limit: 2 minutes per turn',
+      'Due violations result in point penalty',
+      'Valid college ID required'
+    ]
+  },
+  {
+    id: 'chess',
+    name: 'Chess',
+    category: 'Indoor',
+    venue: 'Library Hall',
+    entryFee: '₹50 per participant',
+    reportingTime: '3:00 PM',
+    teamSize: 'Individual',
+    icon: '♟️',
+    rules: [
+      'Individual participation only',
+      'FIDE rules apply',
+      'Rapid chess format: 15 minutes per player',
+      'Touch-move rule enforced',
+      'No electronic devices allowed',
+      'Swiss system tournament format',
+      'Draw by agreement allowed after 20 moves',
+      'Valid college ID mandatory'
+    ]
+  },
+  {
+    id: 'tug-of-war',
+    name: 'Tug of War',
+    category: 'Outdoor',
+    venue: 'Main Ground',
+    entryFee: '₹300 per team',
+    reportingTime: '4:00 PM',
+    duration: 'Best of 3 pulls',
+    teamSize: '8 players + 2 substitutes',
+    icon: '💪',
+    rules: [
+      'Teams consist of 8 players with maximum 2 substitutes',
+      'Best of 3 pulls',
+      'A pull is won when team pulls 4 meters',
+      'No gloves or special equipment allowed',
+      'Proper footwear mandatory (no spikes)',
+      'All team members must pull simultaneously',
+      'Team captain must attend briefing',
+      'Valid college ID required for all participants'
+    ]
+  },
+  {
+    id: 'bgmi',
+    name: 'E-Sports: BGMI',
+    category: 'E-Sports',
+    venue: 'Computer Lab',
+    entryFee: '₹400 per team',
+    reportingTime: '1:00 PM',
+    teamSize: '4 players + 1 substitute',
+    icon: '🎮',
+    rules: [
+      'Teams consist of 4 players with maximum 1 substitute',
+      'Squad mode (4 players)',
+      '3 matches on Erangel, Miramar, and Sanhok',
+      'Points system: Kills + Placement',
+      'No hacks, mods, or cheating software',
+      'Players must use their own BGMI accounts (Level 30+)',
+      'All participants must bring valid college ID',
+      'Mobile devices will be checked before tournament'
+    ]
+  },
+  {
+    id: 'valorant',
+    name: 'E-Sports: Valorant',
+    category: 'E-Sports',
+    venue: 'Computer Lab',
+    entryFee: '₹500 per team',
+    reportingTime: '2:00 PM',
+    teamSize: '5 players + 1 substitute',
+    icon: '🎯',
+    rules: [
+      'Teams consist of 5 players with maximum 1 substitute',
+      'Standard competitive mode',
+      'Best of 3 maps',
+      'Agent selection: No duplicate agents',
+      'Tournament draft mode',
+      'Players must use their own Riot accounts',
+      'No smurfing (accounts must be ranked)',
+      'Valid college ID mandatory for all participants'
+    ]
+  },
+  {
+    id: 'table-tennis',
+    name: 'Table Tennis',
+    category: 'Indoor',
+    venue: 'Recreation Hall',
+    entryFee: '₹100 per participant',
+    reportingTime: '10:00 AM',
+    teamSize: 'Singles',
+    icon: '🏓',
+    rules: [
+      'Singles category only',
+      'ITTF rules apply',
+      'Best of 5 games to 11 points',
+      '2-point lead required to win game',
+      'Service alternates every 2 points',
+      'Players must bring their own paddles',
+      'Non-marking shoes mandatory',
+      'Valid college ID required'
+    ]
+  },
+  {
+    id: 'box-cricket',
+    name: 'Box Cricket',
+    category: 'Indoor',
+    venue: 'Indoor Arena',
+    entryFee: '₹500 per team',
+    reportingTime: '3:00 PM',
+    duration: '6 overs per side',
+    teamSize: '6 players + 2 substitutes',
+    icon: '🏏',
+    rules: [
+      'Teams consist of 6 players with maximum 2 substitutes',
+      'Format: 6 overs per innings',
+      'Tennis ball will be used',
+      'Boundaries: Direct hit on walls',
+      'Maximum 2 overs per bowler',
+      'No powerplay',
+      'Catches taken off walls/ceiling are out',
+      'Valid college ID mandatory for all players'
+    ]
+  },
+  {
+    id: 'futsal',
+    name: 'Futsal',
+    category: 'Indoor',
+    venue: 'Indoor Sports Complex',
+    entryFee: '₹400 per team',
+    reportingTime: '12:00 PM',
+    duration: '40 minutes per match',
+    teamSize: '5 players + 3 substitutes',
+    icon: '⚽',
+    rules: [
+      'Teams consist of 5 players (including goalkeeper) with maximum 3 substitutes',
+      'FIFA Futsal rules apply',
+      'Match duration: 2 halves of 20 minutes each',
+      'Unlimited rolling substitutions',
+      'No offside rule',
+      '4-second rule for kick-ins, free kicks, and goalkeeper restarts',
+      'Non-marking shoes mandatory',
+      'Valid college ID required for all participants'
+    ]
+  }
+];
