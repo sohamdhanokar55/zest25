@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from "react";
 
 const DayWiseEvents = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -23,40 +23,64 @@ const DayWiseEvents = () => {
 
   const days = [
     {
-      day: 'Day 1',
-      date: '20th December 2025 (Saturday)',
+      day: "Day 1",
+      date: "20th December 2025 (Saturday)",
       events: [
-        { name: 'Inauguration Ceremony', icon: '🎉', color: 'from-purple-400 to-purple-600' },
-        { name: 'Cricket', icon: '🏏', color: 'from-red-400 to-red-600' },
-        { name: 'Futsal', icon: '⚽', color: 'from-green-400 to-green-600' },
-        { name: 'Table Tennis', icon: '🏓', color: 'from-blue-400 to-blue-600' },
-        { name: 'Carrom', icon: '🎯', color: 'from-yellow-400 to-yellow-600' },
-        { name: 'Chess', icon: '♟️', color: 'from-gray-400 to-gray-600' },
-        { name: 'Valorant', icon: '🎯', color: 'from-pink-400 to-pink-600' },
-        { name: 'BGMI', icon: '🎮', color: 'from-indigo-400 to-indigo-600' }
-      ]
+        {
+          name: "Inauguration Ceremony",
+          icon: "🎉",
+          color: "from-purple-400 to-purple-600",
+        },
+        { name: "Cricket", icon: "🏏", color: "from-red-400 to-red-600" },
+        { name: "Futsal", icon: "⚽", color: "from-green-400 to-green-600" },
+        {
+          name: "Table Tennis",
+          icon: "🏓",
+          color: "from-blue-400 to-blue-600",
+        },
+        { name: "Carrom", icon: "🎯", color: "from-yellow-400 to-yellow-600" },
+        { name: "Chess", icon: "♟️", color: "from-gray-400 to-gray-600" },
+        { name: "Valorant", icon: "🎯", color: "from-pink-400 to-pink-600" },
+        { name: "BGMI", icon: "🎮", color: "from-indigo-400 to-indigo-600" },
+      ],
     },
     {
-      day: 'Day 2',
-      date: '22nd December 2025 (Monday)',
+      day: "Day 2",
+      date: "22nd December 2025 (Monday)",
       events: [
-        { name: 'Football', icon: '⚽', color: 'from-green-400 to-green-600' },
-        { name: 'Box Cricket', icon: '🏏', color: 'from-orange-400 to-orange-600' },
-        { name: 'Kabaddi', icon: '🤼', color: 'from-orange-500 to-red-600' },
-        { name: 'Badminton', icon: '🏸', color: 'from-blue-400 to-blue-600' }
-      ]
+        { name: "Football", icon: "⚽", color: "from-green-400 to-green-600" },
+        {
+          name: "Box Cricket",
+          icon: "🏏",
+          color: "from-orange-400 to-orange-600",
+        },
+        { name: "Kabaddi", icon: "🤼", color: "from-orange-500 to-red-600" },
+        { name: "Badminton", icon: "🏸", color: "from-blue-400 to-blue-600" },
+      ],
     },
     {
-      day: 'Day 3',
-      date: '23rd December 2025 (Tuesday)',
+      day: "Day 3",
+      date: "23rd December 2025 (Tuesday)",
       events: [
-        { name: 'Athletics', icon: '🏃', color: 'from-cyan-400 to-cyan-600' },
-        { name: 'Volleyball', icon: '🏐', color: 'from-purple-400 to-purple-600' },
-        { name: 'Basketball', icon: '🏀', color: 'from-orange-500 to-orange-700' },
-        { name: 'Tug of War', icon: '💪', color: 'from-red-500 to-red-700' },
-        { name: 'Prize Distribution', icon: '🏆', color: 'from-yellow-500 to-yellow-700' }
-      ]
-    }
+        { name: "Athletics", icon: "🏃", color: "from-cyan-400 to-cyan-600" },
+        {
+          name: "Volleyball",
+          icon: "🏐",
+          color: "from-purple-400 to-purple-600",
+        },
+        {
+          name: "Basketball",
+          icon: "🏀",
+          color: "from-orange-500 to-orange-700",
+        },
+        { name: "Tug of War", icon: "💪", color: "from-red-500 to-red-700" },
+        {
+          name: "Prize Distribution",
+          icon: "🏆",
+          color: "from-yellow-500 to-yellow-700",
+        },
+      ],
+    },
   ];
 
   return (
@@ -79,13 +103,15 @@ const DayWiseEvents = () => {
               key={dayIndex}
               className={`transition-all duration-700 delay-${dayIndex * 200} ${
                 isVisible
-                  ? 'opacity-100 translate-y-0'
-                  : 'opacity-0 translate-y-10'
+                  ? "opacity-100 translate-y-0"
+                  : "opacity-0 translate-y-10"
               }`}
             >
               <div className="bg-white rounded-2xl shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1">
                 <div className="bg-gradient-to-r from-orange-500 to-red-600 p-6 text-white">
-                  <h3 className="text-2xl md:text-3xl font-bold mb-1">{day.day}</h3>
+                  <h3 className="text-2xl md:text-3xl font-bold mb-1">
+                    {day.day}
+                  </h3>
                   <p className="text-sm md:text-lg opacity-90">{day.date}</p>
                 </div>
                 <div className="p-6 space-y-3">

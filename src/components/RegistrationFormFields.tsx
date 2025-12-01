@@ -29,15 +29,13 @@ interface RegistrationFormFieldsProps {
   players: PlayerField[];
   setPlayers: (players: PlayerField[]) => void;
 
+  // UI control
+  hidePlayerFields?: boolean;
+
   // Category (for sports that need it)
   category?: string;
   setCategory?: (value: string) => void;
   categoryOptions?: { label: string; value: string }[];
-
-  // Athletics specific
-  selectedAthleticsEvents?: string[];
-  setSelectedAthleticsEvents?: (events: string[]) => void;
-  athleticsEvents?: { name: string; price: number }[];
 }
 
 const RegistrationFormFields = ({
@@ -62,13 +60,11 @@ const RegistrationFormFields = ({
   category,
   setCategory,
   categoryOptions,
-  selectedAthleticsEvents,
-  setSelectedAthleticsEvents,
-  athleticsEvents,
+  hidePlayerFields,
 }: RegistrationFormFieldsProps) => {
   const groups = ["AN/TE", "ME", "AE", "CE"];
-  const branches = ["AN/TE", "ME", "AE", "CE"];
-  const semesters = ["1", "2", "3", "4", "5", "6"];
+  const branches = ["AN", "ME", "AE", "CE", "TE"];
+  const semesters = ["1K", "2K", "3K", "4K", "5K", "6K"];
 
   const handlePlayerCountChange = (newCount: number) => {
     if (minPlayers !== undefined && newCount < minPlayers) return;
@@ -98,15 +94,6 @@ const RegistrationFormFields = ({
     const updatedPlayers = [...players];
     updatedPlayers[index] = { ...updatedPlayers[index], [field]: value };
     setPlayers(updatedPlayers);
-  };
-
-  const toggleAthleticsEvent = (eventName: string) => {
-    if (!setSelectedAthleticsEvents || !selectedAthleticsEvents) return;
-    setSelectedAthleticsEvents(
-      selectedAthleticsEvents.includes(eventName)
-        ? selectedAthleticsEvents.filter((e) => e !== eventName)
-        : [...selectedAthleticsEvents, eventName]
-    );
   };
 
   return (
@@ -233,36 +220,6 @@ const RegistrationFormFields = ({
         </div>
       )}
 
-      {/* Athletics Events Selection */}
-      {athleticsEvents && setSelectedAthleticsEvents && selectedAthleticsEvents && (
-        <div className="bg-gray-50 p-6 rounded-lg">
-          <h3 className="text-xl font-bold text-gray-900 mb-4">
-            Select Events
-          </h3>
-          <div className="space-y-2 max-h-64 overflow-y-auto">
-            {athleticsEvents.map((event) => (
-              <label
-                key={event.name}
-                className="flex items-center gap-3 p-3 bg-white border border-gray-200 rounded-lg cursor-pointer hover:bg-gray-50 transition-colors"
-              >
-                <input
-                  type="checkbox"
-                  checked={selectedAthleticsEvents.includes(event.name)}
-                  onChange={() => toggleAthleticsEvent(event.name)}
-                  className="w-5 h-5 text-orange-600 border-gray-300 rounded focus:ring-orange-500"
-                />
-                <div className="flex-1">
-                  <div className="font-medium text-gray-900">{event.name}</div>
-                </div>
-                <div className="font-semibold text-orange-600">
-                  ₹{event.price}
-                </div>
-              </label>
-            ))}
-          </div>
-        </div>
-      )}
-
       {/* Number of Players Selector */}
       {minPlayers !== undefined && maxPlayers !== undefined && (
         <div className="bg-gray-50 p-6 rounded-lg">
@@ -308,7 +265,7 @@ const RegistrationFormFields = ({
       )}
 
       {/* Player Fields */}
-      {players.length > 0 && (
+      {players.length > 0 && !hidePlayerFields && (
         <div className="bg-gray-50 p-6 rounded-lg">
           <h3 className="text-xl font-bold text-gray-900 mb-4">
             Player Information
@@ -345,11 +302,7 @@ const RegistrationFormFields = ({
                     <select
                       value={player.branch}
                       onChange={(e) =>
-                        handlePlayerFieldChange(
-                          index,
-                          "branch",
-                          e.target.value
-                        )
+                        handlePlayerFieldChange(index, "branch", e.target.value)
                       }
                       required
                       className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
@@ -397,4 +350,3 @@ const RegistrationFormFields = ({
 };
 
 export default RegistrationFormFields;
-

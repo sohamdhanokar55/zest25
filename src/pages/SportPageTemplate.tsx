@@ -9,6 +9,8 @@ import {
 } from "../utils/razorpay";
 import { EventConfig } from "../config/eventConfig";
 import { events } from "../data/events";
+import LoadingSkeleton from "../components/LoadingSkeleton";
+import SuccessModal from "../components/SuccessModal";
 
 interface SportPageTemplateProps {
   config: EventConfig;
@@ -30,20 +32,23 @@ const SportPageTemplate = ({ config }: SportPageTemplateProps) => {
   const [category, setCategory] = useState("");
   const [shotPutSubCategory, setShotPutSubCategory] = useState("");
 
-  // Athletics events
-  const [selectedAthleticsEvents, setSelectedAthleticsEvents] = useState<
-    string[]
-  >([]);
+  // Athletics event (single selection)
+  const [selectedAthleticsEvent, setSelectedAthleticsEvent] =
+    useState<string>("");
 
   // Relay players (for athletics)
   const needsRelayPlayers =
     config.requiresRelayPlayers &&
-    selectedAthleticsEvents.some(
-      (e) => e === "Relay" || e === "Mixed Relay"
-    );
+    (selectedAthleticsEvent === "Relay" ||
+      selectedAthleticsEvent === "Mixed Relay");
   const [relayPlayers, setRelayPlayers] = useState<
     Array<{ name: string; branch: string; semester: string }>
   >([]);
+  const [isLoadingPayment, setIsLoadingPayment] = useState(false);
+  const [isSubmittingRegistration, setIsSubmittingRegistration] =
+    useState(false);
+  const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false);
+  const [successCountdown, setSuccessCountdown] = useState(5);
 
   // Calculate player limits based on category
   const getPlayerLimits = () => {
@@ -81,10 +86,7 @@ const SportPageTemplate = ({ config }: SportPageTemplateProps) => {
     config.priceType === "categoryBased" ? getCategoryPlayerCount() : null;
 
   const initialPlayerCount =
-    config.fixedPlayerCount ||
-    categoryPlayerCount ||
-    limits.min ||
-    1;
+    config.fixedPlayerCount || categoryPlayerCount || limits.min || 1;
 
   const [numberOfPlayers, setNumberOfPlayers] = useState(initialPlayerCount);
   const [players, setPlayers] = useState<
@@ -96,9 +98,10 @@ const SportPageTemplate = ({ config }: SportPageTemplateProps) => {
   );
 
   // Calculate effective number of players based on config
-  const effectiveNumberOfPlayers = 
-    config.priceType === "categoryBased" && category ? getCategoryPlayerCount() :
-    config.fixedPlayerCount || numberOfPlayers;
+  const effectiveNumberOfPlayers =
+    config.priceType === "categoryBased" && category
+      ? getCategoryPlayerCount()
+      : config.fixedPlayerCount || numberOfPlayers;
 
   // Update players when category changes (for category-based sports)
   useEffect(() => {
@@ -141,19 +144,14 @@ const SportPageTemplate = ({ config }: SportPageTemplateProps) => {
     }
   }, [needsRelayPlayers]);
 
-  const handleAthleticsEventsChange = (events: string[]) => {
-    setSelectedAthleticsEvents(events);
-  };
-
   // Calculate fee
   const calculateFee = (): number => {
     if (config.priceType === "athletics" && config.athleticsEvents) {
-      return selectedAthleticsEvents.reduce((total, eventName) => {
-        const athleticsEvent = config.athleticsEvents?.find(
-          (e) => e.name === eventName
-        );
-        return total + (athleticsEvent?.price || 0);
-      }, 0);
+      if (!selectedAthleticsEvent) return 0;
+      const athleticsEvent = config.athleticsEvents?.find(
+        (e) => e.name === selectedAthleticsEvent
+      );
+      return athleticsEvent?.price || 0;
     }
 
     if (config.priceType === "categoryBased" && category) {
@@ -169,6 +167,71 @@ const SportPageTemplate = ({ config }: SportPageTemplateProps) => {
   };
 
   const totalFee = calculateFee();
+
+  useEffect(() => {
+    if (!isSuccessModalOpen) return;
+
+    setSuccessCountdown(5);
+    const interval = setInterval(() => {
+      setSuccessCountdown((prev) => {
+        if (prev <= 1) {
+          clearInterval(interval);
+          navigate("/");
+          window.location.reload();
+          return 0;
+        }
+        return prev - 1;
+      });
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, [isSuccessModalOpen, navigate]);
+
+  const isSinglePlayerEntry =
+    config.eventKey === "chess" ||
+    (config.eventKey === "carrom" && category === "singles") ||
+    (config.eventKey === "table-tennis" &&
+      (category === "singles-boys" || category === "singles-girls")) ||
+    (config.eventKey === "badminton" &&
+      (category === "singles-boys" || category === "singles-girls")) ||
+    (config.eventKey === "athletics" &&
+      selectedAthleticsEvent !== "Relay" &&
+      selectedAthleticsEvent !== "Mixed Relay");
+
+  const buildPhpSportAndCategory = () => {
+    if (config.eventKey !== "athletics") {
+      return { sport: config.eventKey, category };
+    }
+
+    const eventName = selectedAthleticsEvent.toLowerCase();
+
+    if (eventName === "100m" || eventName === "200m") {
+      return { sport: `athletics-${eventName}`, category };
+    }
+
+    if (eventName === "400m" || eventName === "800m") {
+      return { sport: `athletics-${eventName}`, category: "" };
+    }
+
+    if (eventName === "long jump") {
+      return { sport: "athletics-long-jump", category };
+    }
+
+    if (eventName === "shot put") {
+      const gender = shotPutSubCategory || category;
+      return { sport: "athletics-shot-put", category: gender || "" };
+    }
+
+    if (eventName === "relay") {
+      return { sport: "athletics-relay", category };
+    }
+
+    if (eventName === "mixed relay") {
+      return { sport: "athletics-mixed-relay", category: "" };
+    }
+
+    return { sport: config.eventKey, category };
+  };
 
   const handlePayment = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -188,21 +251,25 @@ const SportPageTemplate = ({ config }: SportPageTemplateProps) => {
       return;
     }
 
-    if (config.priceType === "athletics" && selectedAthleticsEvents.length === 0) {
-      alert("Please select at least one event");
+    if (config.priceType === "athletics" && !selectedAthleticsEvent) {
+      alert("Please select an athletics event");
       return;
     }
 
     if (
       config.requiresShotPutSubCategory &&
-      selectedAthleticsEvents.includes("Shot Put") &&
+      selectedAthleticsEvent === "Shot Put" &&
       !shotPutSubCategory
     ) {
       alert("Please select Shot Put sub-category");
       return;
     }
 
-    if (config.dynamicPlayerFields && players.length > 0) {
+    if (
+      config.dynamicPlayerFields &&
+      players.length > 0 &&
+      !isSinglePlayerEntry
+    ) {
       const incompletePlayers = players.filter(
         (p) => !p.name || !p.branch || !p.semester
       );
@@ -240,12 +307,14 @@ const SportPageTemplate = ({ config }: SportPageTemplateProps) => {
       if (category && config.priceType !== "athletics") {
         paymentDescription += ` - ${category}`;
       }
-      if (config.priceType === "athletics" && selectedAthleticsEvents.length > 0) {
-        paymentDescription += ` - ${selectedAthleticsEvents.join(", ")}`;
+      if (config.priceType === "athletics" && selectedAthleticsEvent) {
+        paymentDescription += ` - ${selectedAthleticsEvent}`;
       }
       if (effectiveNumberOfPlayers > 0 && config.priceType !== "athletics") {
         paymentDescription += ` - ${effectiveNumberOfPlayers} player(s)`;
       }
+
+      setIsLoadingPayment(true);
 
       const options = {
         key,
@@ -254,9 +323,109 @@ const SportPageTemplate = ({ config }: SportPageTemplateProps) => {
         name: config.title,
         description: paymentDescription,
         order_id: order.order_id,
-        handler: (response: RazorpaySuccessResponse) => {
-          alert("Payment successful! Your registration is complete.");
+        handler: async (response: RazorpaySuccessResponse) => {
           console.log("Razorpay payment successful", response);
+
+          try {
+            setIsLoadingPayment(false);
+            setIsSubmittingRegistration(true);
+
+            const base = buildPhpSportAndCategory();
+
+            // Normalize sport/category to lowercase as required
+            const sport = base.sport.toLowerCase();
+            const phpCategory = (base.category || "").toLowerCase();
+
+            // Build players payload expected by PHP API
+            const buildPlayersPayload = () => {
+              // Athletics relay / mixed relay: use relay players
+              if (
+                config.eventKey === "athletics" &&
+                (selectedAthleticsEvent === "Relay" ||
+                  selectedAthleticsEvent === "Mixed Relay")
+              ) {
+                return relayPlayers.map((p) => ({
+                  name: p.name,
+                  dept: p.branch,
+                  sem: p.semester,
+                }));
+              }
+
+              // Single-player entries: only team leader
+              if (isSinglePlayerEntry) {
+                return [
+                  {
+                    name: teamLeaderName,
+                    dept: branch,
+                    sem: semester,
+                  },
+                ];
+              }
+
+              // Team events: team leader + all players
+              return [
+                {
+                  name: teamLeaderName,
+                  dept: branch,
+                  sem: semester,
+                },
+                ...players.map((p) => ({
+                  name: p.name,
+                  dept: p.branch,
+                  sem: p.semester,
+                })),
+              ];
+            };
+
+            const playersPayload = buildPlayersPayload();
+
+            const payload = {
+              sport, // normalized lowercase
+              category: phpCategory, // normalized lowercase
+              players: playersPayload, // [{ name, dept, sem }]
+              dept: branch, // as selected
+              sem: semester, // as selected (e.g. "5K")
+              teamLeaderName: teamLeaderName,
+              contact: teamLeaderContact,
+              altContact: alternateContact,
+              group,
+              noOfPlayers: effectiveNumberOfPlayers || numberOfPlayers,
+              payment_id: response.razorpay_payment_id,
+              order_id: order.order_id,
+              payment_signature: response.razorpay_signature,
+            };
+
+            console.log("FINAL_PAYLOAD_SENT_TO_BACKEND", payload);
+
+            const res = await fetch(
+              "https://apvcouncil.in/api/store-registration.php",
+              {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify(payload),
+              }
+            );
+
+            if (!res.ok) {
+              setIsSubmittingRegistration(false);
+              console.error("Failed to store registration", await res.text());
+              alert(
+                "Payment succeeded, but failed to store registration. Please contact the organizers with your payment ID."
+              );
+              return;
+            }
+
+            setIsSubmittingRegistration(false);
+            setIsSuccessModalOpen(true);
+          } catch (err) {
+            setIsSubmittingRegistration(false);
+            console.error("Error while storing registration", err);
+            alert(
+              "Payment succeeded, but an error occurred while storing registration. Please contact the organizers with your payment ID."
+            );
+          }
         },
         theme: {
           color: "#f97316",
@@ -265,23 +434,28 @@ const SportPageTemplate = ({ config }: SportPageTemplateProps) => {
 
       const razorpayInstance = new window.Razorpay(options);
       razorpayInstance.open();
+      setIsLoadingPayment(false);
     } catch (error) {
       console.error("Failed to initialize payment", error);
       alert("Failed to initialize payment. Please try again.");
+      setIsLoadingPayment(false);
     }
   };
 
   const effectiveMinPlayers = limits.min;
   const effectiveMaxPlayers = limits.max;
-  
+
   // Show player counter only for per-player pricing with variable player count
   const showPlayerCounter =
     config.dynamicPlayerFields &&
     config.priceType === "perPlayer" &&
     effectiveMinPlayers !== effectiveMaxPlayers;
 
+  const showSkeleton = isLoadingPayment || isSubmittingRegistration;
+
   return (
     <Layout>
+      {showSkeleton && <LoadingSkeleton variant="fullPage" />}
       <div className="min-h-screen bg-gray-50 pt-24 pb-12">
         <div className="container mx-auto px-4 max-w-4xl">
           <div className="bg-white rounded-2xl shadow-xl overflow-hidden">
@@ -290,9 +464,7 @@ const SportPageTemplate = ({ config }: SportPageTemplateProps) => {
               <div className="flex items-center gap-4">
                 <div className="text-6xl">{event?.icon || "🏆"}</div>
                 <div>
-                  <h1 className="text-4xl font-bold mb-2">
-                    {config.title}
-                  </h1>
+                  <h1 className="text-4xl font-bold mb-2">{config.title}</h1>
                   <p className="text-lg opacity-90">
                     {event?.category || "Sport"} Registration
                   </p>
@@ -301,7 +473,12 @@ const SportPageTemplate = ({ config }: SportPageTemplateProps) => {
             </div>
 
             {/* Form */}
-            <form onSubmit={handlePayment} className="p-8">
+            <form
+              onSubmit={handlePayment}
+              className={`p-8 ${
+                showSkeleton ? "opacity-0 pointer-events-none" : ""
+              }`}
+            >
               <RegistrationFormFields
                 teamLeaderName={teamLeaderName}
                 setTeamLeaderName={setTeamLeaderName}
@@ -316,22 +493,52 @@ const SportPageTemplate = ({ config }: SportPageTemplateProps) => {
                 semester={semester}
                 setSemester={setSemester}
                 numberOfPlayers={effectiveNumberOfPlayers || 1}
-                setNumberOfPlayers={showPlayerCounter ? setNumberOfPlayers : () => {}}
-                minPlayers={showPlayerCounter ? effectiveMinPlayers : effectiveNumberOfPlayers}
-                maxPlayers={showPlayerCounter ? effectiveMaxPlayers : effectiveNumberOfPlayers}
+                setNumberOfPlayers={
+                  showPlayerCounter ? setNumberOfPlayers : () => {}
+                }
+                minPlayers={
+                  showPlayerCounter
+                    ? effectiveMinPlayers
+                    : effectiveNumberOfPlayers
+                }
+                maxPlayers={
+                  showPlayerCounter
+                    ? effectiveMaxPlayers
+                    : effectiveNumberOfPlayers
+                }
                 players={players}
                 setPlayers={setPlayers}
                 category={category}
                 setCategory={setCategory}
                 categoryOptions={config.categories}
-                selectedAthleticsEvents={selectedAthleticsEvents}
-                setSelectedAthleticsEvents={handleAthleticsEventsChange}
-                athleticsEvents={config.athleticsEvents}
+                hidePlayerFields={isSinglePlayerEntry}
               />
+
+              {/* Athletics event selection (single dropdown) */}
+              {config.priceType === "athletics" && config.athleticsEvents && (
+                <div className="bg-gray-50 p-6 rounded-lg mt-6">
+                  <h3 className="text-xl font-bold text-gray-900 mb-4">
+                    Select Athletics Event
+                  </h3>
+                  <select
+                    value={selectedAthleticsEvent}
+                    onChange={(e) => setSelectedAthleticsEvent(e.target.value)}
+                    required
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
+                  >
+                    <option value="">Select Event</option>
+                    {config.athleticsEvents.map((event) => (
+                      <option key={event.name} value={event.name}>
+                        {event.name} - ₹{event.price}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              )}
 
               {/* Shot Put Sub-Category */}
               {config.requiresShotPutSubCategory &&
-                selectedAthleticsEvents.includes("Shot Put") && (
+                selectedAthleticsEvent === "Shot Put" && (
                   <div className="bg-gray-50 p-6 rounded-lg mt-6">
                     <h3 className="text-xl font-bold text-gray-900 mb-4">
                       Shot Put Category
@@ -396,7 +603,8 @@ const SportPageTemplate = ({ config }: SportPageTemplateProps) => {
                               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
                             >
                               <option value="">Select Branch</option>
-                              <option value="AN/TE">AN/TE</option>
+                              <option value="AN">AN</option>
+                              <option value="TE">TE</option>
                               <option value="ME">ME</option>
                               <option value="AE">AE</option>
                               <option value="CE">CE</option>
@@ -417,7 +625,7 @@ const SportPageTemplate = ({ config }: SportPageTemplateProps) => {
                               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
                             >
                               <option value="">Select Semester</option>
-                              {["1", "2", "3", "4", "5", "6"].map((s) => (
+                              {["1K", "2K", "3K", "4K", "5K", "6K"].map((s) => (
                                 <option key={s} value={s}>
                                   {s}
                                 </option>
@@ -464,9 +672,9 @@ const SportPageTemplate = ({ config }: SportPageTemplateProps) => {
           </div>
         </div>
       </div>
+      <SuccessModal isOpen={isSuccessModalOpen} countdown={successCountdown} />
     </Layout>
   );
 };
 
 export default SportPageTemplate;
-

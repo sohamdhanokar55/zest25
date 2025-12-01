@@ -1,5 +1,12 @@
-import { useEffect, useRef, useState } from 'react';
-import { Calendar, Users, Trophy, ShoppingBag, FileText, Award } from 'lucide-react';
+import { useEffect, useRef, useState } from "react";
+import {
+  Calendar,
+  Users,
+  Trophy,
+  ShoppingBag,
+  FileText,
+  Award,
+} from "lucide-react";
 
 const Timeline = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -24,47 +31,47 @@ const Timeline = () => {
 
   const timelineEvents = [
     {
-      date: '5th December 2025',
-      title: 'Team Formation Starts',
-      description: 'Begin forming your teams and strategizing',
+      date: "5th December 2025",
+      title: "Team Formation Starts",
+      description: "Begin forming your teams and strategizing",
       icon: Users,
-      color: 'from-blue-500 to-blue-600'
+      color: "from-blue-500 to-blue-600",
     },
     {
-      date: '12th December 2025',
-      title: 'Last Date to Purchase Jersey',
-      description: 'Final day to purchase official Zest jersey',
+      date: "12th December 2025",
+      title: "Last Date to Purchase Jersey",
+      description: "Final day to purchase official Zest jersey",
       icon: ShoppingBag,
-      color: 'from-purple-500 to-purple-600'
+      color: "from-purple-500 to-purple-600",
     },
     {
-      date: '15th December 2025',
-      title: 'Last Date to Register for Zest',
-      description: 'Final day for event registrations',
+      date: "15th December 2025",
+      title: "Last Date to Register for Zest",
+      description: "Final day for event registrations",
       icon: Calendar,
-      color: 'from-orange-500 to-red-600'
+      color: "from-orange-500 to-red-600",
     },
     {
-      date: '20th December 2025',
-      title: 'Day 1 Begins',
-      description: 'Inauguration ceremony and Day 1 events commence',
+      date: "20th December 2025",
+      title: "Day 1 Inaugration & Events",
+      description: "Inauguration ceremony and Day 1 events commence",
       icon: Trophy,
-      color: 'from-green-500 to-green-600'
+      color: "from-green-500 to-green-600",
     },
     {
-      date: '22nd December 2025',
-      title: 'Day 2 Events',
-      description: 'Second day of thrilling sports action',
+      date: "22nd December 2025",
+      title: "Day 2 Events",
+      description: "Second day of thrilling sports action",
       icon: Award,
-      color: 'from-cyan-500 to-cyan-600'
+      color: "from-cyan-500 to-cyan-600",
     },
     {
-      date: '23rd December 2025',
-      title: 'Day 3 Events & Prize Distribution',
-      description: 'Final day of events and prize distribution ceremony',
+      date: "23rd December 2025",
+      title: "Day 3 Events & Prize Distribution",
+      description: "Final day of events and prize distribution ceremony",
       icon: Trophy,
-      color: 'from-yellow-500 to-yellow-600'
-    }
+      color: "from-yellow-500 to-yellow-600",
+    },
   ];
 
   return (
@@ -94,19 +101,19 @@ const Timeline = () => {
                     index * 200
                   } ${
                     isVisible
-                      ? 'opacity-100 translate-y-0'
-                      : 'opacity-0 translate-y-10'
+                      ? "opacity-100 translate-y-0"
+                      : "opacity-0 translate-y-10"
                   }`}
                 >
                   <div
                     className={`md:flex items-center ${
-                      index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'
+                      index % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"
                     }`}
                   >
                     <div className="md:w-5/12">
                       <div
                         className={`bg-white p-6 rounded-lg shadow-xl hover:shadow-2xl transition-shadow ${
-                          index % 2 === 0 ? 'md:text-right' : 'md:text-left'
+                          index % 2 === 0 ? "md:text-right" : "md:text-left"
                         }`}
                       >
                         <h3 className="text-xl font-bold text-gray-900 mb-2">

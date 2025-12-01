@@ -5,10 +5,10 @@ const Hero = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
 
   const slides = [
-    "/zest/photos/1.png",
-    "/zest/photos/2.png",
-    "/zest/photos/3.jpg",
-    "/zest/photos/4.JPG",
+    "/zest/photos/1.webp",
+    "/zest/photos/2.webp",
+    "/zest/photos/3.webp",
+    "/zest/photos/4.webp",
   ];
 
   useEffect(() => {
@@ -65,7 +65,7 @@ const Hero = () => {
           Agnel Polytechnic, Vashi
         </p>
         <p className="text-2xl md:text-3xl lg:text-4xl text-white mb-12 font-bold tracking-wide">
-          Run – Rage – Rule
+          Power – Passion – Play
         </p>
         <div className="flex flex-col sm:flex-row gap-4">
           <button

@@ -117,6 +117,11 @@ const Jersey = () => {
                     need to buy another. Only purchase again if it is lost or no
                     longer fits.
                   </p>
+                  <p className="text-yellow-700">
+                    Jersey is mandatory for participation in all events. You
+                    will not be allowed to participate if you do not have the
+                    official Zest Jersey.
+                  </p>
                 </div>
               </div>
             </div>
@@ -169,7 +174,8 @@ const Jersey = () => {
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
                   >
                     <option value="">Select Department</option>
-                    <option value="AN/TE">AN/TE</option>
+                    <option value="AN">ANE</option>
+                    <option value="TE">TE</option>
                     <option value="ME">ME</option>
                     <option value="AE">AE</option>
                     <option value="CE">CE</option>

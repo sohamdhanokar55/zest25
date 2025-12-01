@@ -25,29 +25,30 @@ const JerseyDesigns = () => {
 
   const jerseyDesigns = [
     {
-      name: "Mechanical",
-      image: "/zest/jersey_design/Mechanical.png",
-      department: "ME",
-    },
-    {
       name: "Electronics&Computer",
       image: "/zest/jersey_design/Electronics & Computer.png",
       department: "TE",
     },
     {
-      name: "Artificial Intelligence",
-      image: "/zest/jersey_design/Artificial Intelligence.png",
-      department: "AN",
+      name: "Mechanical",
+      image: "/zest/jersey_design/Mechanical.png",
+      department: "ME",
     },
+    {
+      name: "Civil",
+      image: "/zest/jersey_design/Civil.png",
+      department: "CE",
+    },
+
     {
       name: "Automobile",
       image: "/zest/jersey_design/Automobile.png",
       department: "AE",
     },
     {
-      name: "Civil",
-      image: "/zest/jersey_design/Civil.png",
-      department: "CE",
+      name: "Artificial Intelligence",
+      image: "/zest/jersey_design/Artificial Intelligence.png",
+      department: "AN",
     },
   ];
 
@@ -64,7 +65,9 @@ const JerseyDesigns = () => {
           </h2>
           <div className="w-24 h-1 bg-amber-400 mx-auto mb-4"></div>
           <p className="text-lg text-slate-300 max-w-2xl mx-auto mb-6">
-            Show your department pride with our official Zest jerseys
+            Show your department pride with our official Zest jerseys.
+            <br /> <span className="text-amber-400">Note:</span> Jersey is
+            mandatory for participation in all events.
           </p>
           <button
             onClick={() => navigate("/jersey")}

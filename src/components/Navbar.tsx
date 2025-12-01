@@ -50,11 +50,22 @@ const Navbar = () => {
     { name: "Contact", id: "contact" },
   ];
 
+  const isHome = location.pathname === "/";
+  const navBackgroundClass = isHome
+    ? isScrolled
+      ? "bg-white shadow-lg py-2"
+      : "bg-transparent py-4"
+    : "bg-white shadow-lg py-2";
+
+  const linkTextClass = isHome
+    ? isScrolled
+      ? "text-gray-800"
+      : "text-white"
+    : "text-gray-800";
+
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? "bg-white shadow-lg py-2" : "bg-transparent py-4"
-      }`}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${navBackgroundClass}`}
     >
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between">
@@ -74,9 +85,7 @@ const Navbar = () => {
           <div className="hidden md:flex items-center gap-8">
             <button
               onClick={handleHomeClick}
-              className={`font-medium transition-colors hover:text-orange-600 ${
-                isScrolled ? "text-gray-800" : "text-white"
-              }`}
+              className={`font-medium transition-colors hover:text-orange-600 ${linkTextClass}`}
             >
               Home
             </button>
@@ -84,9 +93,7 @@ const Navbar = () => {
               <button
                 key={link.id}
                 onClick={() => scrollToSection(link.id)}
-                className={`font-medium transition-colors hover:text-orange-600 ${
-                  isScrolled ? "text-gray-800" : "text-white"
-                }`}
+                className={`font-medium transition-colors hover:text-orange-600 ${linkTextClass}`}
               >
                 {link.name}
               </button>
@@ -98,9 +105,9 @@ const Navbar = () => {
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           >
             {isMobileMenuOpen ? (
-              <X className={isScrolled ? "text-gray-800" : "text-white"} />
+              <X className={linkTextClass} />
             ) : (
-              <Menu className={isScrolled ? "text-gray-800" : "text-white"} />
+              <Menu className={linkTextClass} />
             )}
           </button>
         </div>

@@ -26,7 +26,7 @@ const Contact = () => {
     {
       name: "Anshika",
       role: "Asst. Sports Secretary",
-      image: "/zest/team/Anshika.png",
+      image: "/zest/team/Anshika.webp",
       phone: "+91 98765 43210",
       email: "anshika@example.com",
       linkedin: "https://linkedin.com",
@@ -34,7 +34,7 @@ const Contact = () => {
     {
       name: "Saish",
       role: "Sports Secretary",
-      image: "/zest/team/Saish.png",
+      image: "/zest/team/Saish.webp",
       phone: "+91 98765 43211",
       email: "saish@example.com",
       linkedin: "https://linkedin.com",
@@ -42,7 +42,7 @@ const Contact = () => {
     {
       name: "Sara",
       role: "Sports Secretary",
-      image: "/zest/team/Sara.png",
+      image: "/zest/team/Sara.webp",
       phone: "+91 98765 43212",
       email: "sara@example.com",
       linkedin: "https://linkedin.com",
@@ -50,7 +50,7 @@ const Contact = () => {
     {
       name: "Tristan D'souza",
       role: "Asst. Sports Secretary",
-      image: "/zest/team/Tristan.png",
+      image: "/zest/team/Tristan.webp",
       phone: "+91 98765 43213",
       email: "tristan@example.com",
       linkedin: "https://linkedin.com",

@@ -129,4 +129,3 @@ export const SPORT_ROUTES: Record<string, string> = {
   valorant: "/valorant",
   "table-tennis": "/tabletennis",
 };
-

@@ -127,6 +127,11 @@ export const eventConfig: Record<string, EventConfig> = {
     eventKey: "athletics",
     title: "Athletics",
     priceType: "athletics",
+    categories: [
+      { label: "Boys", value: "boys" },
+      { label: "Girls", value: "girls" },
+    ],
+    requiresGender: true,
     athleticsEvents: [
       { name: "100m", price: 100 },
       { name: "200m", price: 100 },
@@ -158,7 +163,7 @@ export const eventConfig: Record<string, EventConfig> = {
     eventKey: "chess",
     title: "Chess",
     priceType: "fixed",
-    fixedPrice: 100,
+    fixedPrice: 1,
     fixedPlayerCount: 1,
     dynamicPlayerFields: true,
   },
@@ -211,4 +216,3 @@ export const eventConfig: Record<string, EventConfig> = {
     dynamicPlayerFields: true,
   },
 };
-
