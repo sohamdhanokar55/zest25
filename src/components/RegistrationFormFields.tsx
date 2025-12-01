@@ -10,6 +10,8 @@ interface RegistrationFormFieldsProps {
   // Team Leader Fields
   teamLeaderName: string;
   setTeamLeaderName: (value: string) => void;
+  teamLeaderEmail: string;
+  setTeamLeaderEmail: (value: string) => void;
   teamLeaderContact: string;
   setTeamLeaderContact: (value: string) => void;
   alternateContact: string;
@@ -32,6 +34,9 @@ interface RegistrationFormFieldsProps {
   // UI control
   hidePlayerFields?: boolean;
 
+  // Validation
+  emailError?: string | null;
+
   // Category (for sports that need it)
   category?: string;
   setCategory?: (value: string) => void;
@@ -41,6 +46,8 @@ interface RegistrationFormFieldsProps {
 const RegistrationFormFields = ({
   teamLeaderName,
   setTeamLeaderName,
+  teamLeaderEmail,
+  setTeamLeaderEmail,
   teamLeaderContact,
   setTeamLeaderContact,
   alternateContact,
@@ -61,6 +68,7 @@ const RegistrationFormFields = ({
   setCategory,
   categoryOptions,
   hidePlayerFields,
+  emailError,
 }: RegistrationFormFieldsProps) => {
   const groups = ["AN/TE", "ME", "AE", "CE"];
   const branches = ["AN", "ME", "AE", "CE", "TE"];
@@ -72,16 +80,20 @@ const RegistrationFormFields = ({
 
     setNumberOfPlayers(newCount);
 
-    // Adjust players array
+    // Player 1 = Team Leader (auto-filled), so we only need additional players
+    // If total is 11, we only need 10 additional players (Player 2-11)
+    const additionalPlayersNeeded = newCount > 1 ? newCount - 1 : 0;
+
+    // Adjust players array to match additional players needed
     const currentPlayers = [...players];
-    if (newCount > currentPlayers.length) {
+    if (additionalPlayersNeeded > currentPlayers.length) {
       // Add new empty players
-      while (currentPlayers.length < newCount) {
+      while (currentPlayers.length < additionalPlayersNeeded) {
         currentPlayers.push({ name: "", branch: "", semester: "" });
       }
     } else {
       // Remove excess players
-      currentPlayers.splice(newCount);
+      currentPlayers.splice(additionalPlayersNeeded);
     }
     setPlayers(currentPlayers);
   };
@@ -116,6 +128,24 @@ const RegistrationFormFields = ({
               className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
               placeholder="Enter team leader name"
             />
+          </div>
+          <div>
+            <label className="block text-sm font-semibold text-gray-700 mb-2">
+              Team Leader Email *
+            </label>
+            <input
+              type="email"
+              value={teamLeaderEmail}
+              onChange={(e) => setTeamLeaderEmail(e.target.value)}
+              required
+              className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 ${
+                emailError ? "border-red-500" : "border-gray-300"
+              }`}
+              placeholder="Enter team leader email"
+            />
+            {emailError && (
+              <p className="mt-1 text-xs text-red-600">{emailError}</p>
+            )}
           </div>
           <div>
             <label className="block text-sm font-semibold text-gray-700 mb-2">
@@ -271,13 +301,64 @@ const RegistrationFormFields = ({
             Player Information
           </h3>
           <div className="space-y-4">
+            {/* Player 1 - Auto-filled from Team Leader (Read-only) */}
+            <div className="bg-gradient-to-r from-orange-50 to-red-50 p-4 rounded-lg border-2 border-orange-200">
+              <div className="flex items-center gap-2 mb-3">
+                <h4 className="font-semibold text-gray-900">
+                  Player 1 (Team Leader)
+                </h4>
+                <span className="text-xs bg-orange-200 text-orange-800 px-2 py-1 rounded-full font-semibold">
+                  Auto-filled
+                </span>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div>
+                  <label className="block text-sm font-semibold text-gray-700 mb-2">
+                    Player Name *
+                  </label>
+                  <input
+                    type="text"
+                    value={teamLeaderName}
+                    disabled
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg bg-gray-100 text-gray-600 cursor-not-allowed"
+                    readOnly
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-semibold text-gray-700 mb-2">
+                    Branch *
+                  </label>
+                  <input
+                    type="text"
+                    value={branch}
+                    disabled
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg bg-gray-100 text-gray-600 cursor-not-allowed"
+                    readOnly
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-semibold text-gray-700 mb-2">
+                    Semester *
+                  </label>
+                  <input
+                    type="text"
+                    value={semester}
+                    disabled
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg bg-gray-100 text-gray-600 cursor-not-allowed"
+                    readOnly
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* Additional Players (Player 2 onwards) */}
             {players.map((player, index) => (
               <div
                 key={index}
                 className="bg-white p-4 rounded-lg border border-gray-200"
               >
                 <h4 className="font-semibold text-gray-700 mb-3">
-                  Player {index + 1}
+                  Player {index + 2}
                 </h4>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                   <div>

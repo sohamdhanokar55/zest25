@@ -44,11 +44,19 @@ const SportPageTemplate = ({ config }: SportPageTemplateProps) => {
   const [relayPlayers, setRelayPlayers] = useState<
     Array<{ name: string; branch: string; semester: string }>
   >([]);
+  const [teamLeaderEmail, setTeamLeaderEmail] = useState("");
+  const [emailError, setEmailError] = useState<string | null>(null);
   const [isLoadingPayment, setIsLoadingPayment] = useState(false);
   const [isSubmittingRegistration, setIsSubmittingRegistration] =
     useState(false);
   const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false);
   const [successCountdown, setSuccessCountdown] = useState(5);
+  const [registrationNumber, setRegistrationNumber] = useState<number | null>(
+    null
+  );
+  const [emailStatus, setEmailStatus] = useState<
+    "sent" | "failed" | "skipped" | null
+  >(null);
 
   // Calculate player limits based on category
   const getPlayerLimits = () => {
@@ -85,14 +93,19 @@ const SportPageTemplate = ({ config }: SportPageTemplateProps) => {
   const categoryPlayerCount =
     config.priceType === "categoryBased" ? getCategoryPlayerCount() : null;
 
-  const initialPlayerCount =
+  const totalPlayerCount =
     config.fixedPlayerCount || categoryPlayerCount || limits.min || 1;
 
-  const [numberOfPlayers, setNumberOfPlayers] = useState(initialPlayerCount);
+  // For team sports: Player 1 = Team Leader, so we only ask for additional players
+  // If total is 11, we only need 10 additional players (Player 2-11)
+  const additionalPlayersNeeded =
+    totalPlayerCount > 1 ? totalPlayerCount - 1 : 0;
+
+  const [numberOfPlayers, setNumberOfPlayers] = useState(totalPlayerCount);
   const [players, setPlayers] = useState<
     Array<{ name: string; branch: string; semester: string }>
   >(
-    Array(initialPlayerCount)
+    Array(additionalPlayersNeeded)
       .fill(null)
       .map(() => ({ name: "", branch: "", semester: "" }))
   );
@@ -108,8 +121,10 @@ const SportPageTemplate = ({ config }: SportPageTemplateProps) => {
     if (config.priceType === "categoryBased" && category) {
       const count = getCategoryPlayerCount();
       setNumberOfPlayers(count);
+      // Only ask for additional players (Player 2 onwards)
+      const additional = count > 1 ? count - 1 : 0;
       setPlayers(
-        Array(count)
+        Array(additional)
           .fill(null)
           .map(() => ({ name: "", branch: "", semester: "" }))
       );
@@ -122,8 +137,10 @@ const SportPageTemplate = ({ config }: SportPageTemplateProps) => {
       const newLimits = getPlayerLimits();
       if (numberOfPlayers < newLimits.min) {
         setNumberOfPlayers(newLimits.min);
+        // Only ask for additional players (Player 2 onwards)
+        const additional = newLimits.min > 1 ? newLimits.min - 1 : 0;
         setPlayers(
-          Array(newLimits.min)
+          Array(additional)
             .fill(null)
             .map(() => ({ name: "", branch: "", semester: "" }))
         );
@@ -235,6 +252,14 @@ const SportPageTemplate = ({ config }: SportPageTemplateProps) => {
 
   const handlePayment = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    // Basic email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!teamLeaderEmail || !emailRegex.test(teamLeaderEmail)) {
+      setEmailError("Please enter a valid email address");
+      return;
+    }
+    setEmailError(null);
 
     // Validation
     if (!teamLeaderName || !teamLeaderContact || !alternateContact) {
@@ -348,6 +373,7 @@ const SportPageTemplate = ({ config }: SportPageTemplateProps) => {
                   name: p.name,
                   dept: p.branch,
                   sem: p.semester,
+                  contact: teamLeaderContact, // Use team leader contact for relay players
                 }));
               }
 
@@ -358,21 +384,24 @@ const SportPageTemplate = ({ config }: SportPageTemplateProps) => {
                     name: teamLeaderName,
                     dept: branch,
                     sem: semester,
+                    contact: teamLeaderContact,
                   },
                 ];
               }
 
-              // Team events: team leader + all players
+              // Team events: Player 1 (Team Leader) + additional players (Player 2 onwards)
               return [
                 {
                   name: teamLeaderName,
                   dept: branch,
                   sem: semester,
+                  contact: teamLeaderContact,
                 },
                 ...players.map((p) => ({
                   name: p.name,
                   dept: p.branch,
                   sem: p.semester,
+                  contact: teamLeaderContact, // All players use team leader contact
                 })),
               ];
             };
@@ -385,14 +414,14 @@ const SportPageTemplate = ({ config }: SportPageTemplateProps) => {
               players: playersPayload, // [{ name, dept, sem }]
               dept: branch, // as selected
               sem: semester, // as selected (e.g. "5K")
-              teamLeaderName: teamLeaderName,
-              contact: teamLeaderContact,
-              altContact: alternateContact,
               group,
               noOfPlayers: effectiveNumberOfPlayers || numberOfPlayers,
-              payment_id: response.razorpay_payment_id,
+              contact: teamLeaderContact,
+              altContact: alternateContact,
               order_id: order.order_id,
+              payment_id: response.razorpay_payment_id,
               payment_signature: response.razorpay_signature,
+              teamLeaderEmail,
             };
 
             console.log("FINAL_PAYLOAD_SENT_TO_BACKEND", payload);
@@ -416,6 +445,28 @@ const SportPageTemplate = ({ config }: SportPageTemplateProps) => {
               );
               return;
             }
+
+            const data = await res.json();
+
+            if (!data.success) {
+              setIsSubmittingRegistration(false);
+              console.error("Backend reported failure", data);
+              alert(
+                "Payment succeeded, but registration failed on the server. Please contact the organizers with your payment ID."
+              );
+              return;
+            }
+
+            setRegistrationNumber(
+              typeof data.sr_no === "number" ? data.sr_no : null
+            );
+            setEmailStatus(
+              data.email_status === "sent" ||
+                data.email_status === "failed" ||
+                data.email_status === "skipped"
+                ? data.email_status
+                : null
+            );
 
             setIsSubmittingRegistration(false);
             setIsSuccessModalOpen(true);
@@ -482,6 +533,8 @@ const SportPageTemplate = ({ config }: SportPageTemplateProps) => {
               <RegistrationFormFields
                 teamLeaderName={teamLeaderName}
                 setTeamLeaderName={setTeamLeaderName}
+                teamLeaderEmail={teamLeaderEmail}
+                setTeamLeaderEmail={setTeamLeaderEmail}
                 teamLeaderContact={teamLeaderContact}
                 setTeamLeaderContact={setTeamLeaderContact}
                 alternateContact={alternateContact}
@@ -512,6 +565,7 @@ const SportPageTemplate = ({ config }: SportPageTemplateProps) => {
                 setCategory={setCategory}
                 categoryOptions={config.categories}
                 hidePlayerFields={isSinglePlayerEntry}
+                emailError={emailError}
               />
 
               {/* Athletics event selection (single dropdown) */}
@@ -651,8 +705,37 @@ const SportPageTemplate = ({ config }: SportPageTemplateProps) => {
                 </div>
               </div>
 
+              {/* Payment Notice */}
+              <div className="mt-6 bg-yellow-50 border-2 border-yellow-400 rounded-lg p-4">
+                <div className="flex items-start gap-3">
+                  <div className="flex-shrink-0 mt-0.5">
+                    <svg
+                      className="w-5 h-5 text-yellow-600"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                  </div>
+                  <div className="flex-1">
+                    <p className="text-sm font-semibold text-yellow-800 mb-1">
+                      Important Notice
+                    </p>
+                    <p className="text-sm text-yellow-700">
+                      After completing the payment, take a screenshot of your
+                      successful payment page. This screenshot will be required
+                      for verification.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
               {/* Submit Button */}
-              <div className="mt-8 flex gap-4">
+              <div className="mt-6 flex gap-4">
                 <button
                   type="button"
                   onClick={() => navigate("/")}
@@ -672,7 +755,12 @@ const SportPageTemplate = ({ config }: SportPageTemplateProps) => {
           </div>
         </div>
       </div>
-      <SuccessModal isOpen={isSuccessModalOpen} countdown={successCountdown} />
+      <SuccessModal
+        isOpen={isSuccessModalOpen}
+        countdown={successCountdown}
+        srNo={registrationNumber}
+        emailStatus={emailStatus}
+      />
     </Layout>
   );
 };
