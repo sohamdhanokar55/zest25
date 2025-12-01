@@ -43,7 +43,7 @@ export const eventConfig: Record<string, EventConfig> = {
   },
   "box-cricket": {
     eventKey: "box-cricket",
-    title: "Box Cricket",
+    title: "Box Cricket (Girls)",
     priceType: "perPlayer",
     perPlayerPrice: 100,
     minPlayers: 7,
@@ -52,7 +52,7 @@ export const eventConfig: Record<string, EventConfig> = {
   },
   futsal: {
     eventKey: "futsal",
-    title: "Futsal",
+    title: "Futsal (Girls)",
     priceType: "perPlayer",
     perPlayerPrice: 100,
     minPlayers: 5,
@@ -61,11 +61,11 @@ export const eventConfig: Record<string, EventConfig> = {
   },
   kabaddi: {
     eventKey: "kabaddi",
-    title: "Kabaddi",
+    title: "Kabaddi (Boys & Girls)",
     priceType: "perPlayer",
     perPlayerPrice: 100,
     minPlayers: 7,
-    maxPlayers: 9,
+    maxPlayers: 12,
     categories: [
       { label: "Boys", value: "boys" },
       { label: "Girls", value: "girls" },
@@ -75,12 +75,12 @@ export const eventConfig: Record<string, EventConfig> = {
   },
   basketball: {
     eventKey: "basketball",
-    title: "Basketball",
+    title: "Basketball (Boys & Girls)",
     priceType: "perPlayer",
     perPlayerPrice: 100,
     categoryBasedLimits: {
       boys: { min: 5, max: 10 },
-      girls: { min: 3, max: 5 },
+      girls: { min: 3, max: 6 },
     },
     categories: [
       { label: "Boys", value: "boys" },
@@ -111,7 +111,7 @@ export const eventConfig: Record<string, EventConfig> = {
   },
   volleyball: {
     eventKey: "volleyball",
-    title: "Volleyball",
+    title: "Volleyball (Boys & Girls)",
     priceType: "perPlayer",
     perPlayerPrice: 100,
     minPlayers: 6,
@@ -163,7 +163,7 @@ export const eventConfig: Record<string, EventConfig> = {
     eventKey: "chess",
     title: "Chess",
     priceType: "fixed",
-    fixedPrice: 1,
+    fixedPrice: 100,
     fixedPlayerCount: 1,
     dynamicPlayerFields: true,
   },
@@ -183,7 +183,7 @@ export const eventConfig: Record<string, EventConfig> = {
   },
   bgmi: {
     eventKey: "bgmi",
-    title: "E-Sports: BGMI",
+    title: "E-Sports (BGMI)",
     priceType: "perPlayer",
     perPlayerPrice: 100,
     fixedPlayerCount: 4,
@@ -191,10 +191,10 @@ export const eventConfig: Record<string, EventConfig> = {
   },
   valorant: {
     eventKey: "valorant",
-    title: "E-Sports: Valorant",
+    title: "E-Sports (VALORANT)",
     priceType: "perPlayer",
     perPlayerPrice: 100,
-    fixedPlayerCount: 4,
+    fixedPlayerCount: 5,
     dynamicPlayerFields: true,
   },
   "table-tennis": {
