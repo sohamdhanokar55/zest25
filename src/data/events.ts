@@ -5,7 +5,7 @@ export const events: Event[] = [
     id: 'football',
     name: 'Football',
     category: 'Outdoor',
-    day: 'Day 1 - 22nd December',
+    day: 'Day 2 - 22nd December',
     venue: 'Main Football Ground',
     entryFee: '₹500 per team',
     reportingTime: '9:00 AM',
@@ -20,14 +20,15 @@ export const events: Event[] = [
       'Yellow and red card system in effect',
       'Proper football boots and shin guards mandatory',
       'All players must carry valid college ID',
-      'Team captain must attend pre-match briefing'
+      'Team captain must attend pre-match briefing',
+      'Note: You will not be allowed to participate if you do not have the official Zest Jersey. Jersey is mandatory for participation.'
     ]
   },
   {
     id: 'kabaddi',
     name: 'Kabaddi',
     category: 'Outdoor',
-    day: 'Day 1 - 22nd December',
+    day: 'Day 2 - 22nd December',
     venue: 'Sports Complex Arena',
     entryFee: '₹400 per team',
     reportingTime: '10:00 AM',
@@ -42,14 +43,15 @@ export const events: Event[] = [
       'Super Tackle and Super Raid points applicable',
       'All players must wear appropriate sports attire',
       'Valid college ID card is mandatory',
-      'Captains must report 15 minutes before match time'
+      'Captains must report 15 minutes before match time',
+      'Note: You will not be allowed to participate if you do not have the official Zest Jersey. Jersey is mandatory for participation.'
     ]
   },
   {
     id: 'basketball',
     name: 'Basketball',
     category: 'Outdoor',
-    day: 'Day 1 - 22nd December',
+    day: 'Day 3 - 23rd December',
     venue: 'Basketball Court',
     entryFee: '₹400 per team',
     reportingTime: '11:00 AM',
@@ -64,14 +66,15 @@ export const events: Event[] = [
       'Personal fouls limit: 5 per player',
       'Team fouls reset each quarter',
       'Proper basketball shoes mandatory',
-      'Valid student ID required for all participants'
+      'Valid student ID required for all participants',
+      'Note: You will not be allowed to participate if you do not have the official Zest Jersey. Jersey is mandatory for participation.'
     ]
   },
   {
     id: 'badminton',
     name: 'Badminton',
     category: 'Indoor',
-    day: 'Day 2 - 23rd December',
+    day: 'Day 2 - 22nd December',
     venue: 'Indoor Sports Hall',
     entryFee: '₹200 per team',
     reportingTime: '9:00 AM',
@@ -86,14 +89,15 @@ export const events: Event[] = [
       '2-point lead required to win game',
       'Players must bring their own rackets',
       'Non-marking shoes mandatory',
-      'Valid college ID required'
+      'Valid college ID required',
+      'Note: You will not be allowed to participate if you do not have the official Zest Jersey. Jersey is mandatory for participation.'
     ]
   },
   {
     id: 'volleyball',
     name: 'Volleyball',
     category: 'Outdoor',
-    day: 'Day 2 - 23rd December',
+    day: 'Day 3 - 23rd December',
     venue: 'Volleyball Court',
     entryFee: '₹400 per team',
     reportingTime: '10:00 AM',
@@ -108,14 +112,15 @@ export const events: Event[] = [
       'Rally scoring system',
       'Maximum 3 touches per side',
       'Rotation rule strictly enforced',
-      'Proper sports shoes mandatory'
+      'Proper sports shoes mandatory',
+      'Note: You will not be allowed to participate if you do not have the official Zest Jersey. Jersey is mandatory for participation.'
     ]
   },
   {
     id: 'cricket',
     name: 'Cricket',
     category: 'Outdoor',
-    day: 'Day 2 - 23rd December',
+    day: 'Day 1 - 20th December',
     venue: 'Cricket Ground',
     entryFee: '₹600 per team',
     reportingTime: '11:00 AM',
@@ -130,13 +135,15 @@ export const events: Event[] = [
       'Wide ball and no-ball rules as per ICC',
       'DRS not available',
       'Teams must wear matching colored clothing',
-      'Valid college ID mandatory for all players'
+      'Valid college ID mandatory for all players',
+      'Note: You will not be allowed to participate if you do not have the official Zest Jersey. Jersey is mandatory for participation.'
     ]
   },
   {
     id: 'athletics',
     name: 'Athletics',
     category: 'Outdoor',
+    day: 'Day 3 - 23rd December',
     venue: 'Athletic Track',
     entryFee: '₹100 per participant',
     reportingTime: '8:00 AM',
@@ -150,13 +157,15 @@ export const events: Event[] = [
       'Participants must wear proper running shoes',
       'Spikes allowed for track events',
       'All participants must report for warmup 30 minutes early',
-      'Valid college ID mandatory'
+      'Valid college ID mandatory',
+      'Note: You will not be allowed to participate if you do not have the official Zest Jersey. Jersey is mandatory for participation.'
     ]
   },
   {
     id: 'carrom',
     name: 'Carrom',
     category: 'Indoor',
+    day: 'Day 1 - 20th December',
     venue: 'Recreation Hall',
     entryFee: '₹100 per team',
     reportingTime: '2:00 PM',
@@ -170,13 +179,15 @@ export const events: Event[] = [
       'Queen must be covered',
       'Time limit: 2 minutes per turn',
       'Due violations result in point penalty',
-      'Valid college ID required'
+      'Valid college ID required',
+      'Note: You will not be allowed to participate if you do not have the official Zest Jersey. Jersey is mandatory for participation.'
     ]
   },
   {
     id: 'chess',
     name: 'Chess',
     category: 'Indoor',
+    day: 'Day 1 - 20th December',
     venue: 'Library Hall',
     entryFee: '₹50 per participant',
     reportingTime: '3:00 PM',
@@ -190,13 +201,15 @@ export const events: Event[] = [
       'No electronic devices allowed',
       'Swiss system tournament format',
       'Draw by agreement allowed after 20 moves',
-      'Valid college ID mandatory'
+      'Valid college ID mandatory',
+      'Note: You will not be allowed to participate if you do not have the official Zest Jersey. Jersey is mandatory for participation.'
     ]
   },
   {
     id: 'tug-of-war',
     name: 'Tug of War',
     category: 'Outdoor',
+    day: 'Day 3 - 23rd December',
     venue: 'Main Ground',
     entryFee: '₹300 per team',
     reportingTime: '4:00 PM',
@@ -211,13 +224,15 @@ export const events: Event[] = [
       'Proper footwear mandatory (no spikes)',
       'All team members must pull simultaneously',
       'Team captain must attend briefing',
-      'Valid college ID required for all participants'
+      'Valid college ID required for all participants',
+      'Note: You will not be allowed to participate if you do not have the official Zest Jersey. Jersey is mandatory for participation.'
     ]
   },
   {
     id: 'bgmi',
     name: 'E-Sports: BGMI',
     category: 'E-Sports',
+    day: 'Day 1 - 20th December',
     venue: 'Computer Lab',
     entryFee: '₹400 per team',
     reportingTime: '1:00 PM',
@@ -231,13 +246,15 @@ export const events: Event[] = [
       'No hacks, mods, or cheating software',
       'Players must use their own BGMI accounts (Level 30+)',
       'All participants must bring valid college ID',
-      'Mobile devices will be checked before tournament'
+      'Mobile devices will be checked before tournament',
+      'Note: You will not be allowed to participate if you do not have the official Zest Jersey. Jersey is mandatory for participation.'
     ]
   },
   {
     id: 'valorant',
     name: 'E-Sports: Valorant',
     category: 'E-Sports',
+    day: 'Day 1 - 20th December',
     venue: 'Computer Lab',
     entryFee: '₹500 per team',
     reportingTime: '2:00 PM',
@@ -251,13 +268,15 @@ export const events: Event[] = [
       'Tournament draft mode',
       'Players must use their own Riot accounts',
       'No smurfing (accounts must be ranked)',
-      'Valid college ID mandatory for all participants'
+      'Valid college ID mandatory for all participants',
+      'Note: You will not be allowed to participate if you do not have the official Zest Jersey. Jersey is mandatory for participation.'
     ]
   },
   {
     id: 'table-tennis',
     name: 'Table Tennis',
     category: 'Indoor',
+    day: 'Day 1 - 20th December',
     venue: 'Recreation Hall',
     entryFee: '₹100 per participant',
     reportingTime: '10:00 AM',
@@ -271,13 +290,15 @@ export const events: Event[] = [
       'Service alternates every 2 points',
       'Players must bring their own paddles',
       'Non-marking shoes mandatory',
-      'Valid college ID required'
+      'Valid college ID required',
+      'Note: You will not be allowed to participate if you do not have the official Zest Jersey. Jersey is mandatory for participation.'
     ]
   },
   {
     id: 'box-cricket',
     name: 'Box Cricket',
     category: 'Indoor',
+    day: 'Day 2 - 22nd December',
     venue: 'Indoor Arena',
     entryFee: '₹500 per team',
     reportingTime: '3:00 PM',
@@ -292,13 +313,15 @@ export const events: Event[] = [
       'Maximum 2 overs per bowler',
       'No powerplay',
       'Catches taken off walls/ceiling are out',
-      'Valid college ID mandatory for all players'
+      'Valid college ID mandatory for all players',
+      'Note: You will not be allowed to participate if you do not have the official Zest Jersey. Jersey is mandatory for participation.'
     ]
   },
   {
     id: 'futsal',
     name: 'Futsal',
     category: 'Indoor',
+    day: 'Day 1 - 20th December',
     venue: 'Indoor Sports Complex',
     entryFee: '₹400 per team',
     reportingTime: '12:00 PM',
@@ -313,7 +336,8 @@ export const events: Event[] = [
       'No offside rule',
       '4-second rule for kick-ins, free kicks, and goalkeeper restarts',
       'Non-marking shoes mandatory',
-      'Valid college ID required for all participants'
+      'Valid college ID required for all participants',
+      'Note: You will not be allowed to participate if you do not have the official Zest Jersey. Jersey is mandatory for participation.'
     ]
   }
 ];

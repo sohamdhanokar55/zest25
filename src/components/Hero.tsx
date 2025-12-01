@@ -1,20 +1,20 @@
-import { useState, useEffect } from 'react';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { useState, useEffect } from "react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 const Hero = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
 
   const slides = [
-    'https://images.pexels.com/photos/274422/pexels-photo-274422.jpeg',
-    'https://images.pexels.com/photos/3621104/pexels-photo-3621104.jpeg',
-    'https://images.pexels.com/photos/209977/pexels-photo-209977.jpeg',
-    'https://images.pexels.com/photos/1618200/pexels-photo-1618200.jpeg'
+    "/zest/photos/1.png",
+    "/zest/photos/2.png",
+    "/zest/photos/3.jpg",
+    "/zest/photos/4.JPG",
   ];
 
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % slides.length);
-    }, 5000);
+    }, 6000);
     return () => clearInterval(interval);
   }, []);
 
@@ -29,7 +29,7 @@ const Hero = () => {
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+      element.scrollIntoView({ behavior: "smooth" });
     }
   };
 
@@ -39,8 +39,8 @@ const Hero = () => {
         {slides.map((slide, index) => (
           <div
             key={index}
-            className={`absolute inset-0 transition-opacity duration-1000 ${
-              index === currentSlide ? 'opacity-100' : 'opacity-0'
+            className={`absolute inset-0 transition-opacity duration-1500 ease-in-out ${
+              index === currentSlide ? "opacity-100" : "opacity-0"
             }`}
           >
             <img
@@ -55,24 +55,27 @@ const Hero = () => {
       <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/70"></div>
 
       <div className="relative h-full flex flex-col items-center justify-center text-center px-4 z-10">
-        <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold text-white mb-4 animate-fade-in">
+        <h1 className="text-6xl md:text-8xl lg:text-9xl font-bold text-white mb-6 animate-fade-in tracking-tight">
           ZEST
         </h1>
-        <p className="text-2xl md:text-3xl lg:text-4xl text-orange-400 mb-2 font-semibold">
+        <p className="text-2xl md:text-3xl lg:text-4xl text-orange-400 mb-3 font-semibold">
           Annual Sports Event 2025
         </p>
-        <p className="text-xl md:text-2xl text-white mb-12">
+        <p className="text-xl md:text-2xl lg:text-3xl text-white mb-4 font-medium">
           Agnel Polytechnic, Vashi
+        </p>
+        <p className="text-2xl md:text-3xl lg:text-4xl text-white mb-12 font-bold tracking-wide">
+          Run – Rage – Rule
         </p>
         <div className="flex flex-col sm:flex-row gap-4">
           <button
-            onClick={() => scrollToSection('register')}
+            onClick={() => scrollToSection("register")}
             className="px-8 py-4 bg-gradient-to-r from-orange-500 to-red-600 text-white font-semibold rounded-full hover:shadow-2xl hover:scale-105 transition-all duration-300"
           >
             Register Now
           </button>
           <button
-            onClick={() => scrollToSection('events')}
+            onClick={() => scrollToSection("events")}
             className="px-8 py-4 bg-white/10 backdrop-blur-sm text-white font-semibold rounded-full border-2 border-white hover:bg-white hover:text-gray-900 transition-all duration-300"
           >
             View Events
@@ -99,7 +102,7 @@ const Hero = () => {
             key={index}
             onClick={() => setCurrentSlide(index)}
             className={`w-3 h-3 rounded-full transition-all ${
-              index === currentSlide ? 'bg-orange-500 w-8' : 'bg-white/50'
+              index === currentSlide ? "bg-orange-500 w-8" : "bg-white/50"
             }`}
           />
         ))}

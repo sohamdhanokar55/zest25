@@ -1,5 +1,5 @@
-import { useEffect, useRef, useState } from 'react';
-import { Phone, Mail, Linkedin } from 'lucide-react';
+import { useEffect, useRef, useState } from "react";
+import { Phone, Mail, Linkedin } from "lucide-react";
 
 const Contact = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -24,37 +24,37 @@ const Contact = () => {
 
   const contacts = [
     {
-      name: 'Rahul Sharma',
-      role: 'Sports Coordinator',
-      image: 'https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg',
-      phone: '+91 98765 43210',
-      email: 'rahul.sharma@example.com',
-      linkedin: 'https://linkedin.com'
+      name: "Anshika",
+      role: "Asst. Sports Secretary",
+      image: "/zest/team/Anshika.png",
+      phone: "+91 98765 43210",
+      email: "anshika@example.com",
+      linkedin: "https://linkedin.com",
     },
     {
-      name: 'Priya Patel',
-      role: 'Event Manager',
-      image: 'https://images.pexels.com/photos/3763188/pexels-photo-3763188.jpeg',
-      phone: '+91 98765 43211',
-      email: 'priya.patel@example.com',
-      linkedin: 'https://linkedin.com'
+      name: "Saish",
+      role: "Sports Secretary",
+      image: "/zest/team/Saish.png",
+      phone: "+91 98765 43211",
+      email: "saish@example.com",
+      linkedin: "https://linkedin.com",
     },
     {
-      name: 'Arjun Mehta',
-      role: 'Technical Head',
-      image: 'https://images.pexels.com/photos/2182970/pexels-photo-2182970.jpeg',
-      phone: '+91 98765 43212',
-      email: 'arjun.mehta@example.com',
-      linkedin: 'https://linkedin.com'
+      name: "Sara",
+      role: "Sports Secretary",
+      image: "/zest/team/Sara.png",
+      phone: "+91 98765 43212",
+      email: "sara@example.com",
+      linkedin: "https://linkedin.com",
     },
     {
-      name: 'Sneha Desai',
-      role: 'Registration Lead',
-      image: 'https://images.pexels.com/photos/3763152/pexels-photo-3763152.jpeg',
-      phone: '+91 98765 43213',
-      email: 'sneha.desai@example.com',
-      linkedin: 'https://linkedin.com'
-    }
+      name: "Tristan D'souza",
+      role: "Asst. Sports Secretary",
+      image: "/zest/team/Tristan.png",
+      phone: "+91 98765 43213",
+      email: "tristan@example.com",
+      linkedin: "https://linkedin.com",
+    },
   ];
 
   return (
@@ -78,10 +78,12 @@ const Contact = () => {
           {contacts.map((contact, index) => (
             <div
               key={index}
-              className={`group transition-all duration-500 delay-${index * 100} ${
+              className={`group transition-all duration-500 delay-${
+                index * 100
+              } ${
                 isVisible
-                  ? 'opacity-100 translate-y-0'
-                  : 'opacity-0 translate-y-10'
+                  ? "opacity-100 translate-y-0"
+                  : "opacity-0 translate-y-10"
               }`}
             >
               <div className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-300">
@@ -89,7 +91,7 @@ const Contact = () => {
                   <img
                     src={contact.image}
                     alt={contact.name}
-                    className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500"
+                    className="w-full h-68 object-cover object-center group-hover:scale-110 transition-transform duration-500"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center pb-4 gap-3">
                     <a
@@ -115,10 +117,12 @@ const Contact = () => {
                   </div>
                 </div>
                 <div className="p-6 text-center">
-                  <h3 className="text-xl font-bold text-gray-900 mb-1">
+                  <h3 className="text-xl font-bold text-gray-900 mb-2">
                     {contact.name}
                   </h3>
-                  <p className="text-orange-600 font-semibold">{contact.role}</p>
+                  <p className="text-orange-600 font-semibold text-sm uppercase tracking-wide">
+                    {contact.role}
+                  </p>
                 </div>
               </div>
             </div>

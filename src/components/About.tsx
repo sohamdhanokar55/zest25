@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from "react";
 
 const About = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -30,7 +30,7 @@ const About = () => {
       <div className="container mx-auto px-4">
         <div
           className={`max-w-4xl mx-auto text-center transition-all duration-1000 ${
-            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
           }`}
         >
           <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
@@ -38,21 +38,35 @@ const About = () => {
           </h2>
           <div className="w-24 h-1 bg-gradient-to-r from-orange-500 to-red-600 mx-auto mb-8"></div>
           <p className="text-lg md:text-xl text-gray-700 leading-relaxed mb-6">
-            ZEST is the annual sports extravaganza of Agnel Polytechnic, Vashi,
-            where passion meets competition and spirit meets sportsmanship. This
-            two-day celebration of athletic excellence brings together students from
-            various departments to compete, collaborate, and create unforgettable memories.
+            ZEST, the prestigious annual sports event of Agnel Polytechnic,
+            Vashi, is a dynamic celebration of athletic skill, teamwork, and
+            student spirit. The event brings together participants from various
+            departments, creating an atmosphere filled with energy,
+            determination, and friendly competition. With a diverse lineup of
+            sports such as volleyball, cricket, football, athletics, and indoor
+            games, ZEST provides a platform for students to showcase their
+            talent, discipline, and passion for sports. Each match is conducted
+            with professionalism and fairness, reflecting the institution’s
+            commitment to promoting sportsmanship and holistic development.
           </p>
           <p className="text-lg md:text-xl text-gray-700 leading-relaxed mb-6">
-            From traditional sports like football and cricket to modern e-sports
-            competitions, ZEST offers a platform for every athlete to shine. It's not
-            just about winning; it's about the journey, the teamwork, and the indomitable
-            spirit of youth that makes every moment count.
+            Beyond physical performance, ZEST plays a significant role in
+            building character and confidence among students. It encourages
+            leadership, unity, and mutual respect, as participants learn to work
+            together, overcome challenges, and strive for excellence. The event
+            also highlights the strong organizational capabilities of the
+            student committees and staff, who ensure smooth coordination and an
+            engaging experience for all. Over the years, ZEST has grown into a
+            cherished tradition, symbolizing enthusiasm, perseverance, and the
+            vibrant college culture of Agnel Polytechnic. It stands as a
+            reminder that sports are not just games, but powerful experiences
+            that inspire growth, resilience, and lifelong memories.
           </p>
-          <p className="text-lg md:text-xl text-gray-700 leading-relaxed">
-            Join us in celebrating the essence of sportsmanship, unity, and excellence
-            at ZEST 2025 – where champions are made and legends are born!
-          </p>
+          {/* <p className="text-lg md:text-xl text-gray-700 leading-relaxed">
+            Join us in celebrating the essence of sportsmanship, unity, and
+            excellence at ZEST 2025 – where champions are made and legends are
+            born!
+          </p> */}
         </div>
       </div>
     </section>

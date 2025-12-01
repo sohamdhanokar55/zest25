@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { Calendar, Users, Trophy } from 'lucide-react';
+import { Calendar, Users, Trophy, ShoppingBag, FileText, Award } from 'lucide-react';
 
 const Timeline = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -31,18 +31,39 @@ const Timeline = () => {
       color: 'from-blue-500 to-blue-600'
     },
     {
+      date: '12th December 2025',
+      title: 'Last Date to Purchase Jersey',
+      description: 'Final day to purchase official Zest jersey',
+      icon: ShoppingBag,
+      color: 'from-purple-500 to-purple-600'
+    },
+    {
       date: '15th December 2025',
-      title: 'Last Date to Register',
+      title: 'Last Date to Register for Zest',
       description: 'Final day for event registrations',
       icon: Calendar,
       color: 'from-orange-500 to-red-600'
     },
     {
-      date: '22nd & 23rd December 2025',
-      title: 'ZEST Event Days',
-      description: 'Two days of thrilling sports action',
+      date: '20th December 2025',
+      title: 'Day 1 Begins',
+      description: 'Inauguration ceremony and Day 1 events commence',
       icon: Trophy,
       color: 'from-green-500 to-green-600'
+    },
+    {
+      date: '22nd December 2025',
+      title: 'Day 2 Events',
+      description: 'Second day of thrilling sports action',
+      icon: Award,
+      color: 'from-cyan-500 to-cyan-600'
+    },
+    {
+      date: '23rd December 2025',
+      title: 'Day 3 Events & Prize Distribution',
+      description: 'Final day of events and prize distribution ceremony',
+      icon: Trophy,
+      color: 'from-yellow-500 to-yellow-600'
     }
   ];
 

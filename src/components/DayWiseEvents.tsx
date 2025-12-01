@@ -24,20 +24,37 @@ const DayWiseEvents = () => {
   const days = [
     {
       day: 'Day 1',
-      date: '22nd December',
+      date: '20th December 2025 (Saturday)',
       events: [
-        { name: 'Football', icon: '⚽', color: 'from-green-400 to-green-600' },
-        { name: 'Kabaddi', icon: '🤼', color: 'from-orange-400 to-red-600' },
-        { name: 'Basketball', icon: '🏀', color: 'from-orange-500 to-orange-700' }
+        { name: 'Inauguration Ceremony', icon: '🎉', color: 'from-purple-400 to-purple-600' },
+        { name: 'Cricket', icon: '🏏', color: 'from-red-400 to-red-600' },
+        { name: 'Futsal', icon: '⚽', color: 'from-green-400 to-green-600' },
+        { name: 'Table Tennis', icon: '🏓', color: 'from-blue-400 to-blue-600' },
+        { name: 'Carrom', icon: '🎯', color: 'from-yellow-400 to-yellow-600' },
+        { name: 'Chess', icon: '♟️', color: 'from-gray-400 to-gray-600' },
+        { name: 'Valorant', icon: '🎯', color: 'from-pink-400 to-pink-600' },
+        { name: 'BGMI', icon: '🎮', color: 'from-indigo-400 to-indigo-600' }
       ]
     },
     {
       day: 'Day 2',
-      date: '23rd December',
+      date: '22nd December 2025 (Monday)',
       events: [
-        { name: 'Badminton', icon: '🏸', color: 'from-blue-400 to-blue-600' },
+        { name: 'Football', icon: '⚽', color: 'from-green-400 to-green-600' },
+        { name: 'Box Cricket', icon: '🏏', color: 'from-orange-400 to-orange-600' },
+        { name: 'Kabaddi', icon: '🤼', color: 'from-orange-500 to-red-600' },
+        { name: 'Badminton', icon: '🏸', color: 'from-blue-400 to-blue-600' }
+      ]
+    },
+    {
+      day: 'Day 3',
+      date: '23rd December 2025 (Tuesday)',
+      events: [
+        { name: 'Athletics', icon: '🏃', color: 'from-cyan-400 to-cyan-600' },
         { name: 'Volleyball', icon: '🏐', color: 'from-purple-400 to-purple-600' },
-        { name: 'Cricket', icon: '🏏', color: 'from-red-400 to-red-600' }
+        { name: 'Basketball', icon: '🏀', color: 'from-orange-500 to-orange-700' },
+        { name: 'Tug of War', icon: '💪', color: 'from-red-500 to-red-700' },
+        { name: 'Prize Distribution', icon: '🏆', color: 'from-yellow-500 to-yellow-700' }
       ]
     }
   ];
@@ -56,7 +73,7 @@ const DayWiseEvents = () => {
           <div className="w-24 h-1 bg-gradient-to-r from-orange-500 to-red-600 mx-auto"></div>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
           {days.map((day, dayIndex) => (
             <div
               key={dayIndex}
@@ -66,24 +83,24 @@ const DayWiseEvents = () => {
                   : 'opacity-0 translate-y-10'
               }`}
             >
-              <div className="bg-white rounded-2xl shadow-xl overflow-hidden hover:shadow-2xl transition-shadow">
+              <div className="bg-white rounded-2xl shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1">
                 <div className="bg-gradient-to-r from-orange-500 to-red-600 p-6 text-white">
-                  <h3 className="text-3xl font-bold mb-1">{day.day}</h3>
-                  <p className="text-lg opacity-90">{day.date}</p>
+                  <h3 className="text-2xl md:text-3xl font-bold mb-1">{day.day}</h3>
+                  <p className="text-sm md:text-lg opacity-90">{day.date}</p>
                 </div>
-                <div className="p-6 space-y-4">
+                <div className="p-6 space-y-3">
                   {day.events.map((event, eventIndex) => (
                     <div
                       key={eventIndex}
-                      className="group flex items-center gap-4 p-4 rounded-xl hover:bg-gray-50 transition-all cursor-pointer"
+                      className="group flex items-center gap-4 p-4 rounded-xl hover:bg-gradient-to-r hover:from-orange-50 hover:to-red-50 transition-all cursor-pointer border border-transparent hover:border-orange-200"
                     >
                       <div
-                        className={`w-16 h-16 rounded-full bg-gradient-to-br ${event.color} flex items-center justify-center text-3xl shadow-lg group-hover:scale-110 transition-transform`}
+                        className={`w-14 h-14 md:w-16 md:h-16 rounded-full bg-gradient-to-br ${event.color} flex items-center justify-center text-2xl md:text-3xl shadow-lg group-hover:scale-110 group-hover:rotate-6 transition-all duration-300`}
                       >
                         {event.icon}
                       </div>
-                      <div>
-                        <h4 className="text-xl font-bold text-gray-900 group-hover:text-orange-600 transition-colors">
+                      <div className="flex-1">
+                        <h4 className="text-lg md:text-xl font-bold text-gray-900 group-hover:text-orange-600 transition-colors">
                           {event.name}
                         </h4>
                       </div>

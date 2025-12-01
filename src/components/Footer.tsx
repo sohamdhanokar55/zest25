@@ -1,4 +1,4 @@
-import { Facebook, Instagram, Twitter, Youtube } from "lucide-react";
+import { Facebook, Instagram, Twitter, Youtube, Linkedin } from "lucide-react";
 
 const Footer = () => {
   return (
@@ -7,10 +7,10 @@ const Footer = () => {
         <div className="flex flex-col items-center">
           <div className="flex items-center gap-6 mb-6">
             <div className="w-28 h-28 bg-gradient-to-br rounded-full flex items-center justify-center text-white font-bold text-2xl shadow-lg">
-              <img src="council.png"></img>
+              <img src="/zest/council.png" alt="Council Logo"></img>
             </div>
             <div className="w-24 h-24 bg-gradient-to-br rounded-full flex items-center justify-center text-white font-bold text-2xl shadow-lg">
-              <img src="agnel.png"></img>
+              <img src="/zest/agnel.png" alt="Agnel Logo"></img>
             </div>
           </div>
 
@@ -20,26 +20,29 @@ const Footer = () => {
           </p>
 
           <div className="flex gap-6 mb-6">
-            <a
+            {/* <a
               href="#"
               className="bg-white/10 p-3 rounded-full hover:bg-orange-500 transition-colors"
             >
               <Facebook size={24} />
-            </a>
+            </a> */}
             <a
-              href="#"
+              href="https://www.instagram.com/apv_council/"
+              target="_blank"
               className="bg-white/10 p-3 rounded-full hover:bg-orange-500 transition-colors"
             >
               <Instagram size={24} />
             </a>
             <a
-              href="#"
+              href="https://www.linkedin.com/company/agnel-polytechnic-vashi-council"
+              target="_blank"
               className="bg-white/10 p-3 rounded-full hover:bg-orange-500 transition-colors"
             >
-              <Twitter size={24} />
+              <Linkedin size={24} />
             </a>
             <a
-              href="#"
+              href="https://www.youtube.com/@APVMEDIA0423"
+              target="_blank"
               className="bg-white/10 p-3 rounded-full hover:bg-orange-500 transition-colors"
             >
               <Youtube size={24} />

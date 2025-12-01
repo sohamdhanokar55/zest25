@@ -54,24 +54,26 @@ const AboutUs = () => {
             >
               <div className="space-y-6">
                 <p className="text-lg text-gray-700 leading-relaxed">
-                  Fr. Conceicao Rodrigues Institute of Technology, Agnel
-                  Polytechnic, Vashi is a premier technical education
-                  institution established in 1983. Located in the heart of Navi
-                  Mumbai, our institute has been a beacon of excellence in
-                  technical education for over four decades.
+                  The founder of Agnel ashram, Fr. C. Rodrigues was a great
+                  visionary. His vision was to foster love and understanding
+                  among the various communities in India and to contribute to
+                  the development of self-reliance among the youth through
+                  education.
                 </p>
                 <p className="text-lg text-gray-700 leading-relaxed">
-                  With state-of-the-art infrastructure, highly qualified
-                  faculty, and a commitment to holistic development, Agnel
-                  Polytechnic prepares students not just for careers, but for
-                  life. Our focus extends beyond academics to sports, cultural
-                  activities, and personality development.
+                  Agnel Polytechnic in Vashi, Navi Mumbai, was started in 1983
+                  with only one program - Diploma in civil engineering. It has
+                  grown since then, and today we have five branches of study in
+                  the polytechnic - Diploma in Civil Engineering, Diploma in
+                  Mechanical Engineering, Diploma in Automobile engineering,
+                  Diploma in Electronics and Computer Engineering and Diploma in
+                  Artificial Intelligence & Machine Learning.
                 </p>
                 <p className="text-lg text-gray-700 leading-relaxed">
-                  The APV Council (Agnel Polytechnic Vashi Council) is the
-                  driving force behind student activities, organizing events
-                  like ZEST that foster teamwork, leadership, and the spirit of
-                  healthy competition among students.
+                  What makes Agnel Polytechnic a unique institution in Mumbai is
+                  its discipline and culture and the dedication of the faculty
+                  in imparting knowledge and expertise to the students in a
+                  cosmopolitan atmosphere.
                 </p>
 
                 {/* <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-6">
@@ -102,7 +104,7 @@ const AboutUs = () => {
               <div className="relative">
                 <div className="absolute inset-0 bg-gradient-to-br from-orange-500 to-red-600 rounded-2xl transform rotate-3"></div>
                 <img
-                  src="apv.png"
+                  src="/zest/apv.png"
                   alt="Agnel Polytechnic Campus"
                   className="relative rounded-2xl shadow-2xl w-full h-96 object-cover"
                 />
