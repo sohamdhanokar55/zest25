@@ -227,7 +227,7 @@ const SportPageTemplate = ({ config }: SportPageTemplateProps) => {
     }
 
     if (eventName === "400m" || eventName === "800m") {
-      return { sport: `athletics-${eventName}`, category: "" };
+      return { sport: `athletics-${eventName}`, category };
     }
 
     if (eventName === "long jump") {

@@ -112,8 +112,14 @@ function resolveSheetName({ sportKey, category, athleticsEvent, subCategory }) {
         if (category === "boys") return "AthleticsBoys(200M)";
         if (category === "girls") return "AthleticsGirls(200M)";
       }
-      if (athleticsEvent === "400m") return "Athletics(400M)";
-      if (athleticsEvent === "800m") return "Athletics(800M)";
+      if (athleticsEvent === "400m") {
+        if (category === "boys") return "AthleticsBoys(400M)";
+        if (category === "girls") return "AthleticsGirls(400M)";
+      }
+      if (athleticsEvent === "800m") {
+        if (category === "boys") return "AthleticsBoys(800M)";
+        if (category === "girls") return "AthleticsGirls(800M)";
+      }
       if (athleticsEvent === "Long Jump") {
         if (category === "boys") return "LongJump(Boys)";
         if (category === "girls") return "LongJump(Girls)";
@@ -146,7 +152,8 @@ function resolveSheetName({ sportKey, category, athleticsEvent, subCategory }) {
     case "table-tennis":
       if (category === "singles-boys") return "TableTennis(Boys)";
       if (category === "singles-girls") return "TableTennis(Girls)";
-      if (category === "doubles-boys") return "TableTennis(Doubles)";
+      if (category === "doubles-boys") return "TableTennisBoys(Doubles)";
+      if (category === "doubles-girls") return "TableTennisGirls(Doubles)";
       if (category === "mixed") return "TableTennis(Mixed)";
       break;
     case "box-cricket":
