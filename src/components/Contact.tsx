@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { Phone, Mail, Linkedin } from "lucide-react";
+import { Phone, MessageCircle } from "lucide-react";
 
 const Contact = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -24,36 +24,32 @@ const Contact = () => {
 
   const contacts = [
     {
-      name: "Anshika",
-      role: "Asst. Sports Secretary",
-      image: "/zest/team/Anshika.webp",
-      phone: "+91 98765 43210",
-      email: "anshika@example.com",
-      linkedin: "https://linkedin.com",
-    },
-    {
-      name: "Saish",
-      role: "Sports Secretary",
-      image: "/zest/team/Saish.webp",
-      phone: "+91 98765 43211",
-      email: "saish@example.com",
-      linkedin: "https://linkedin.com",
-    },
-    {
-      name: "Sara",
+      name: "Sara Pathak",
       role: "Sports Secretary",
       image: "/zest/team/Sara.webp",
-      phone: "+91 98765 43212",
-      email: "sara@example.com",
-      linkedin: "https://linkedin.com",
+      phone: "+91 8928005205",
+      whatsapp: "918928005205",
+    },
+    {
+      name: "Saish Surve",
+      role: "Sports Secretary",
+      image: "/zest/team/Saish.webp",
+      phone: "+91 8591891503",
+      whatsapp: "918591891503",
+    },
+    {
+      name: "Anshika Gupta",
+      role: "Asst. Girls Representative",
+      image: "/zest/team/Anshika.webp",
+      phone: "+91 9004727821",
+      whatsapp: "919004727821",
     },
     {
       name: "Tristan D'souza",
       role: "Asst. Sports Secretary",
       image: "/zest/team/Tristan.webp",
-      phone: "+91 98765 43213",
-      email: "tristan@example.com",
-      linkedin: "https://linkedin.com",
+      phone: "+91 7400298923",
+      whatsapp: "917400298923",
     },
   ];
 
@@ -97,22 +93,18 @@ const Contact = () => {
                     <a
                       href={`tel:${contact.phone}`}
                       className="bg-white/90 p-2 rounded-full hover:bg-orange-500 hover:text-white transition-colors"
+                      title="Call"
                     >
                       <Phone size={20} />
                     </a>
                     <a
-                      href={`mailto:${contact.email}`}
-                      className="bg-white/90 p-2 rounded-full hover:bg-orange-500 hover:text-white transition-colors"
-                    >
-                      <Mail size={20} />
-                    </a>
-                    <a
-                      href={contact.linkedin}
+                      href={`https://wa.me/${contact.whatsapp}`}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="bg-white/90 p-2 rounded-full hover:bg-orange-500 hover:text-white transition-colors"
+                      className="bg-white/90 p-2 rounded-full hover:bg-green-500 hover:text-white transition-colors"
+                      title="WhatsApp"
                     >
-                      <Linkedin size={20} />
+                      <MessageCircle size={20} />
                     </a>
                   </div>
                 </div>

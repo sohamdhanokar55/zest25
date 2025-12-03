@@ -57,6 +57,7 @@ const SportPageTemplate = ({ config }: SportPageTemplateProps) => {
   const [emailStatus, setEmailStatus] = useState<
     "sent" | "failed" | "skipped" | null
   >(null);
+  const [isPrePaymentOpen, setIsPrePaymentOpen] = useState(false);
 
   // Calculate player limits based on category
   const getPlayerLimits = () => {
@@ -315,7 +316,14 @@ const SportPageTemplate = ({ config }: SportPageTemplateProps) => {
       }
     }
 
+    // All validations passed, open pre-payment modal
+    setIsPrePaymentOpen(true);
+  };
+
+  const handleStartPayment = async () => {
     try {
+      setIsPrePaymentOpen(false);
+
       await loadRazorpay();
       const order = await createOrder(totalFee);
       const key = import.meta.env.VITE_RAZORPAY_KEY_ID;
@@ -755,6 +763,55 @@ const SportPageTemplate = ({ config }: SportPageTemplateProps) => {
           </div>
         </div>
       </div>
+
+      {/* Pre-Payment Confirmation Modal */}
+      {isPrePaymentOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm">
+          <div className="w-full max-w-md mx-4 bg-white rounded-2xl shadow-2xl p-6">
+            <h2 className="text-xl font-bold text-gray-900 mb-3 text-center">
+              Important Notice Before Payment
+            </h2>
+
+            <p className="text-sm text-gray-700 mb-2">
+              Please take a screenshot of the payment success page after
+              completing the transaction.
+            </p>
+
+            <p className="text-sm text-gray-700 mb-2">
+              If you do not receive the confirmation email, kindly contact the
+              organizer immediately.
+            </p>
+
+            <p className="text-sm text-gray-800 mb-2">
+              <span className="font-semibold">Contact:</span> OCM Head –
+              9321895202
+            </p>
+
+            <p className="text-xs text-gray-600 mb-4">
+              <span className="font-semibold">Note:</span> No refund will be
+              provided without valid proof of payment. For any issues, please
+              contact the organizers at least 5 days before the event begins.
+            </p>
+
+            <div className="flex gap-3 mt-4">
+              <button
+                onClick={() => setIsPrePaymentOpen(false)}
+                className="flex-1 py-2 px-4 border-2 border-gray-300 text-gray-700 font-semibold rounded-lg hover:bg-gray-50 transition-all"
+              >
+                Cancel
+              </button>
+
+              <button
+                onClick={handleStartPayment}
+                className="flex-1 py-2 px-4 bg-gradient-to-r from-orange-500 to-red-600 text-white font-semibold rounded-lg hover:shadow-lg hover:scale-105 transition-all"
+              >
+                I Agree & Continue
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
       <SuccessModal
         isOpen={isSuccessModalOpen}
         countdown={successCountdown}

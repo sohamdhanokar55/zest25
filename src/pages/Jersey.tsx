@@ -540,7 +540,7 @@ const Jersey = () => {
 
                   <div className="w-full rounded-xl overflow-hidden bg-gray-100 border border-gray-200">
                     <img
-                      src="/zest/sizechart.jpg"
+                      src="/zest/sizechart.png"
                       alt="Jersey Size Chart"
                       className="w-full h-auto object-contain"
                     />
