@@ -152,15 +152,21 @@ const SportPageTemplate = ({ config }: SportPageTemplateProps) => {
   // Update relay players when relay events are selected/deselected
   useEffect(() => {
     if (needsRelayPlayers && relayPlayers.length === 0) {
-      setRelayPlayers(
-        Array(4)
-          .fill(null)
-          .map(() => ({ name: "", branch: "", semester: "" }))
-      );
+      // Auto-fill first player with team leader info
+      const playersArray = Array(4)
+        .fill(null)
+        .map(() => ({ name: "", branch: "", semester: "" }));
+      // Set Player 1 as Team Leader
+      playersArray[0] = {
+        name: teamLeaderName,
+        branch: branch,
+        semester: semester,
+      };
+      setRelayPlayers(playersArray);
     } else if (!needsRelayPlayers && relayPlayers.length > 0) {
       setRelayPlayers([]);
     }
-  }, [needsRelayPlayers]);
+  }, [needsRelayPlayers, teamLeaderName, branch, semester]);
 
   // Calculate fee
   const calculateFee = (): number => {
@@ -628,11 +634,23 @@ const SportPageTemplate = ({ config }: SportPageTemplateProps) => {
                     {relayPlayers.map((player, index) => (
                       <div
                         key={index}
-                        className="bg-white p-4 rounded-lg border border-gray-200"
+                        className={`p-4 rounded-lg border ${
+                          index === 0
+                            ? "bg-gradient-to-r from-orange-50 to-red-50 border-orange-200"
+                            : "bg-white border-gray-200"
+                        }`}
                       >
-                        <h4 className="font-semibold text-gray-700 mb-3">
-                          Team Member {index + 1}
-                        </h4>
+                        <div className="flex items-center gap-2 mb-3">
+                          <h4 className="font-semibold text-gray-700">
+                            Team Member {index + 1}
+                            {index === 0 && " (Team Leader)"}
+                          </h4>
+                          {index === 0 && (
+                            <span className="text-xs bg-orange-200 text-orange-800 px-2 py-1 rounded-full font-semibold">
+                              Auto-filled
+                            </span>
+                          )}
+                        </div>
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                           <div>
                             <label className="block text-sm font-semibold text-gray-700 mb-2">
@@ -646,8 +664,13 @@ const SportPageTemplate = ({ config }: SportPageTemplateProps) => {
                                 updated[index].name = e.target.value;
                                 setRelayPlayers(updated);
                               }}
-                              required
-                              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
+                              disabled={index === 0}
+                              className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 ${
+                                index === 0
+                                  ? "border-gray-300 bg-gray-100 text-gray-600 cursor-not-allowed"
+                                  : "border-gray-300"
+                              }`}
+                              placeholder="Enter name"
                             />
                           </div>
                           <div>
@@ -661,8 +684,12 @@ const SportPageTemplate = ({ config }: SportPageTemplateProps) => {
                                 updated[index].branch = e.target.value;
                                 setRelayPlayers(updated);
                               }}
-                              required
-                              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
+                              disabled={index === 0}
+                              className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 ${
+                                index === 0
+                                  ? "border-gray-300 bg-gray-100 text-gray-600 cursor-not-allowed"
+                                  : "border-gray-300"
+                              }`}
                             >
                               <option value="">Select Branch</option>
                               <option value="AN">AN</option>
@@ -683,8 +710,12 @@ const SportPageTemplate = ({ config }: SportPageTemplateProps) => {
                                 updated[index].semester = e.target.value;
                                 setRelayPlayers(updated);
                               }}
-                              required
-                              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
+                              disabled={index === 0}
+                              className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 ${
+                                index === 0
+                                  ? "border-gray-300 bg-gray-100 text-gray-600 cursor-not-allowed"
+                                  : "border-gray-300"
+                              }`}
                             >
                               <option value="">Select Semester</option>
                               {["1K", "2K", "3K", "4K", "5K", "6K"].map((s) => (

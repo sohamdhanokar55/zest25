@@ -1,13 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import {
-  X,
-  MapPin,
-  Clock,
-  DollarSign,
-  Users,
-  Calendar,
-} from "lucide-react";
+import { X, MapPin, Clock, DollarSign, Users, Calendar } from "lucide-react";
 import { Event } from "../types/Event";
 import { SPORT_ROUTES } from "../utils/sportConfig";
 
@@ -16,7 +9,6 @@ interface EventModalProps {
   isOpen: boolean;
   onClose: () => void;
 }
-
 
 const EventModal = ({ event, isOpen, onClose }: EventModalProps) => {
   const navigate = useNavigate();
@@ -140,19 +132,21 @@ const EventModal = ({ event, isOpen, onClose }: EventModalProps) => {
               </h3>
               <ul className="space-y-3">
                 {event.rules.map((rule, index) => {
-                  const isJerseyRule = rule.includes('Jersey is mandatory');
+                  const isJerseyRule = rule.includes("Jersey is mandatory");
                   return (
                     <li
                       key={index}
                       className={`flex items-start gap-3 ${
-                        isJerseyRule ? 'bg-yellow-50 p-4 rounded-lg border-l-4 border-yellow-500' : ''
+                        isJerseyRule
+                          ? "bg-yellow-50 p-4 rounded-lg border-l-4 border-yellow-500"
+                          : ""
                       }`}
                     >
                       <span
                         className={`flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center text-sm font-bold ${
                           isJerseyRule
-                            ? 'bg-gradient-to-br from-yellow-500 to-orange-600 text-white'
-                            : 'bg-gradient-to-br from-orange-500 to-red-600 text-white'
+                            ? "bg-gradient-to-br from-yellow-500 to-orange-600 text-white"
+                            : "bg-gradient-to-br from-orange-500 to-red-600 text-white"
                         }`}
                       >
                         {index + 1}
@@ -160,8 +154,8 @@ const EventModal = ({ event, isOpen, onClose }: EventModalProps) => {
                       <span
                         className={`leading-relaxed ${
                           isJerseyRule
-                            ? 'text-orange-800 font-semibold'
-                            : 'text-gray-700'
+                            ? "text-orange-800 font-semibold"
+                            : "text-gray-700"
                         }`}
                       >
                         {rule}

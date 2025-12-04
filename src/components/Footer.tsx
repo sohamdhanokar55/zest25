@@ -1,4 +1,11 @@
-import { Facebook, Instagram, Twitter, Youtube, Linkedin } from "lucide-react";
+import {
+  Facebook,
+  Instagram,
+  Twitter,
+  Youtube,
+  Linkedin,
+  MessageCircle,
+} from "lucide-react";
 
 const Footer = () => {
   return (
@@ -46,6 +53,13 @@ const Footer = () => {
               className="bg-white/10 p-3 rounded-full hover:bg-orange-500 transition-colors"
             >
               <Youtube size={24} />
+            </a>
+            <a
+              href="https://whatsapp.com/channel/0029VbBPi7KJkK7FaH6VwS3S"
+              target="_blank"
+              className="bg-white/10 p-3 rounded-full hover:bg-orange-500 transition-colors"
+            >
+              <MessageCircle size={24} />
             </a>
           </div>
 

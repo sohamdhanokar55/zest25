@@ -87,7 +87,10 @@ const JerseyDesigns = () => {
                   : "opacity-0 translate-y-10"
               }`}
             >
-              <div className="bg-slate-800 border border-slate-700 rounded-lg overflow-hidden hover:border-amber-400 transition-all duration-300 group h-full">
+              <button
+                onClick={() => navigate("/jersey")}
+                className="w-full h-full bg-slate-800 border border-slate-700 rounded-lg overflow-hidden hover:border-amber-400 transition-all duration-300 group cursor-pointer"
+              >
                 <div className="relative overflow-hidden bg-slate-700 aspect-[3/4]">
                   <img
                     src={jersey.image}
@@ -103,7 +106,7 @@ const JerseyDesigns = () => {
                     {jersey.department}
                   </p>
                 </div>
-              </div>
+              </button>
             </div>
           ))}
         </div>

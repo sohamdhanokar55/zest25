@@ -38,7 +38,7 @@ const Timeline = () => {
       color: "from-blue-500 to-blue-600",
     },
     {
-      date: "12th December 2025",
+      date: "11th December 2025",
       title: "Last Date to Purchase Jersey",
       description: "Final day to purchase official Zest jersey",
       icon: ShoppingBag,

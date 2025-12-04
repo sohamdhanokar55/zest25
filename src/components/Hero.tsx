@@ -34,12 +34,15 @@ const Hero = () => {
   };
 
   return (
-    <section id="home" className="relative h-screen w-full overflow-hidden">
-      <div className="absolute inset-0">
+    <section
+      id="home"
+      className="relative h-screen w-screen max-w-full overflow-x-hidden"
+    >
+      <div className="absolute inset-0 w-full h-full overflow-x-hidden">
         {slides.map((slide, index) => (
           <div
             key={index}
-            className={`absolute inset-0 transition-opacity duration-1500 ease-in-out ${
+            className={`absolute inset-0 w-full h-full transition-opacity duration-1500 ease-in-out ${
               index === currentSlide ? "opacity-100" : "opacity-0"
             }`}
           >
@@ -54,7 +57,7 @@ const Hero = () => {
 
       <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/70"></div>
 
-      <div className="relative h-full flex flex-col items-center justify-center text-center px-4 z-10">
+      <div className="relative h-full flex flex-col items-center justify-center text-center px-4 z-10 w-full max-w-full overflow-x-hidden">
         <h1 className="text-6xl md:text-8xl lg:text-9xl font-bold text-white mb-6 animate-fade-in tracking-tight">
           ZEST
         </h1>
@@ -67,7 +70,7 @@ const Hero = () => {
         <p className="text-2xl md:text-3xl lg:text-4xl text-white mb-12 font-bold tracking-wide">
           Power – Passion – Play
         </p>
-        <div className="flex flex-col sm:flex-row gap-4">
+        <div className="flex flex-col sm:flex-row gap-4 w-full max-w-full px-4 justify-center">
           <button
             onClick={() => scrollToSection("register")}
             className="px-8 py-4 bg-gradient-to-r from-orange-500 to-red-600 text-white font-semibold rounded-full hover:shadow-2xl hover:scale-105 transition-all duration-300"
@@ -83,18 +86,18 @@ const Hero = () => {
         </div>
       </div>
 
-      <button
+      {/* <button
         onClick={prevSlide}
-        className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/20 backdrop-blur-sm p-2 rounded-full hover:bg-white/40 transition-all z-20"
+        className="absolute  top-1/2 -translate-y-1/2 bg-white/20 backdrop-blur-sm p-2 rounded-full hover:bg-white/40 transition-all z-20"
       >
-        <ChevronLeft className="text-white" size={32} />
+        <ChevronLeft className="text-white" size={12} />
       </button>
       <button
         onClick={nextSlide}
-        className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/20 backdrop-blur-sm p-2 rounded-full hover:bg-white/40 transition-all z-20"
+        className="absolute right-1 top-1/2 -translate-y-1/2 bg-white/20 backdrop-blur-sm p-2 rounded-full hover:bg-white/40 transition-all z-20"
       >
-        <ChevronRight className="text-white" size={32} />
-      </button>
+        {/* <ChevronRight className="text-white" size={12} /> */}
+      {/* </button> */}
 
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-2 z-20">
         {slides.map((_, index) => (
