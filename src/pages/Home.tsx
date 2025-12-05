@@ -1,16 +1,17 @@
-import { useState, useEffect } from 'react';
-import Layout from '../components/Layout';
-import Hero from '../components/Hero';
-import About from '../components/About';
-import Timeline from '../components/Timeline';
-import DayWiseEvents from '../components/DayWiseEvents';
-import EventsGrid from '../components/EventsGrid';
-import AboutUs from '../components/AboutUs';
-import Contact from '../components/Contact';
-import EventModal from '../components/EventModal';
-import JerseyDesigns from '../components/JerseyDesigns';
-import CommunityRulebook from '../components/CommunityRulebook';
-import { Event } from '../types/Event';
+import { useState, useEffect } from "react";
+import Layout from "../components/Layout";
+import Hero from "../components/Hero";
+import About from "../components/About";
+import Timeline from "../components/Timeline";
+import DayWiseEvents from "../components/DayWiseEvents";
+import EventsGrid from "../components/EventsGrid";
+import GeneralRules from "../components/GeneralRules";
+import AboutUs from "../components/AboutUs";
+import Contact from "../components/Contact";
+import EventModal from "../components/EventModal";
+import JerseyDesigns from "../components/JerseyDesigns";
+import CommunityRulebook from "../components/CommunityRulebook";
+import { Event } from "../types/Event";
 
 const Home = () => {
   const [selectedEvent, setSelectedEvent] = useState<Event | null>(null);
@@ -28,9 +29,9 @@ const Home = () => {
 
   useEffect(() => {
     if (isModalOpen) {
-      document.body.style.overflow = 'hidden';
+      document.body.style.overflow = "hidden";
     } else {
-      document.body.style.overflow = 'unset';
+      document.body.style.overflow = "unset";
     }
   }, [isModalOpen]);
 
@@ -43,6 +44,7 @@ const Home = () => {
       <JerseyDesigns />
       <CommunityRulebook />
       <EventsGrid onEventClick={openEventModal} />
+      <GeneralRules />
       <AboutUs />
       <Contact />
       <EventModal
@@ -55,4 +57,3 @@ const Home = () => {
 };
 
 export default Home;
-

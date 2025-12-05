@@ -15,7 +15,7 @@ import TugOfWar from "./pages/TugOfWar";
 import BGMI from "./pages/BGMI";
 import Valorant from "./pages/Valorant";
 import TableTennis from "./pages/TableTennis";
-import Jersey from "./pages/Jersey";
+// import Jersey from "./pages/Jersey";
 
 function App() {
   return (
@@ -37,7 +37,7 @@ function App() {
         <Route path="/bgmi" element={<BGMI />} />
         <Route path="/valorant" element={<Valorant />} />
         <Route path="/tabletennis" element={<TableTennis />} />
-        <Route path="/jersey" element={<Jersey />} />
+        {/* <Route path="/jersey" element={<Jersey />} /> */}
       </Routes>
     </BrowserRouter>
   );

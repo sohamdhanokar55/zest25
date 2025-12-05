@@ -31,19 +31,20 @@ const Contact = () => {
       whatsapp: "918928005205",
     },
     {
-      name: "Saish Surve",
-      role: "Sports Secretary",
-      image: "/zest/team/Saish.webp",
-      phone: "+91 8591891503",
-      whatsapp: "918591891503",
-    },
-    {
       name: "Anshika Gupta",
       role: "Asst. Girls Representative",
       image: "/zest/team/Anshika.webp",
       phone: "+91 9004727821",
       whatsapp: "919004727821",
     },
+    {
+      name: "Saish Surve",
+      role: "Sports Secretary",
+      image: "/zest/team/Saish.webp",
+      phone: "+91 8591891503",
+      whatsapp: "918591891503",
+    },
+
     {
       name: "Tristan D'souza",
       role: "Asst. Sports Secretary",

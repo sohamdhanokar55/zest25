@@ -813,15 +813,18 @@ const SportPageTemplate = ({ config }: SportPageTemplateProps) => {
               organizer immediately.
             </p>
 
-            <p className="text-sm text-gray-800 mb-2">
-              <span className="font-semibold">Contact:</span> OCM Head –
-              9321895202
-            </p>
-
             <p className="text-xs text-gray-600 mb-4">
               <span className="font-semibold">Note:</span> No refund will be
               provided without valid proof of payment. For any issues, please
               contact the organizers at least 5 days before the event begins.
+            </p>
+            <p className="text-sm text-gray-800 mb-2">
+              <span className="font-semibold">
+                Contact:
+                <br />
+              </span>{" "}
+              Soham Dhanokar <br />
+              (OCM Head) <br /> 9321895202
             </p>
 
             <div className="flex gap-3 mt-4">

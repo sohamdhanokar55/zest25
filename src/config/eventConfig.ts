@@ -29,7 +29,7 @@ export const eventConfig: Record<string, EventConfig> = {
     priceType: "perPlayer",
     perPlayerPrice: 100,
     minPlayers: 11,
-    maxPlayers: 15,
+    maxPlayers: 16,
     dynamicPlayerFields: true,
   },
   cricket: {
@@ -38,7 +38,7 @@ export const eventConfig: Record<string, EventConfig> = {
     priceType: "perPlayer",
     perPlayerPrice: 100,
     minPlayers: 11,
-    maxPlayers: 15,
+    maxPlayers: 16,
     dynamicPlayerFields: true,
   },
   "box-cricket": {

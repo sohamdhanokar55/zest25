@@ -30,6 +30,14 @@ const CommunityRulebook = () => {
     link.click();
     document.body.removeChild(link);
   };
+  const handleDownloadSchedule = () => {
+    const link = document.createElement("a");
+    link.href = "/zest/schedule.pdf";
+    link.download = "Zest-2025-Schedule.pdf";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
 
   const WHATSAPP_LINK = import.meta.env.VITE_WHATSAPP_LINK || "#";
 
@@ -50,7 +58,7 @@ const CommunityRulebook = () => {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+        <div className="grid md:grid-cols-3 gap-8 max-w-7xl mx-auto">
           {/* WhatsApp Community Card */}
           <div
             className={`transition-all duration-700 delay-0 ${
@@ -124,6 +132,44 @@ const CommunityRulebook = () => {
                 </p>
                 <button
                   onClick={handleDownloadRulebook}
+                  className="w-full flex items-center justify-center gap-2 py-4 px-6 bg-gradient-to-r from-orange-500 to-red-600 text-white font-bold rounded-lg hover:shadow-xl hover:scale-105 transition-all duration-300"
+                >
+                  <Download size={20} />
+                  Download Rulebook
+                </button>
+              </div>
+            </div>
+          </div>
+          {/* {Schedule card} */}
+          <div
+            className={`transition-all duration-700 delay-200 ${
+              isVisible
+                ? "opacity-100 translate-y-0"
+                : "opacity-0 translate-y-10"
+            }`}
+          >
+            <div className="bg-white rounded-2xl shadow-xl overflow-hidden hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-300 h-full">
+              <div className="bg-gradient-to-br from-orange-500 to-red-600 p-8 text-white">
+                <div className="flex items-center gap-4 mb-4">
+                  <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center">
+                    <FileText size={32} />
+                  </div>
+                  <div>
+                    <h3 className="text-2xl font-bold">Download Schedule</h3>
+                    <p className="text-orange-100 text-sm mt-1">
+                      Official Schedule of Events
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div className="p-8">
+                <p className="text-gray-600 mb-6">
+                  Download the complete Schedule containing all timings, with
+                  dates, and for Zest events.Make sure you Participate in events
+                  according to the schedule!
+                </p>
+                <button
+                  onClick={handleDownloadSchedule}
                   className="w-full flex items-center justify-center gap-2 py-4 px-6 bg-gradient-to-r from-orange-500 to-red-600 text-white font-bold rounded-lg hover:shadow-xl hover:scale-105 transition-all duration-300"
                 >
                   <Download size={20} />

@@ -1,8 +1,6 @@
 import { useEffect, useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
 
 const JerseyDesigns = () => {
-  const navigate = useNavigate();
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
 
@@ -22,6 +20,8 @@ const JerseyDesigns = () => {
 
     return () => observer.disconnect();
   }, []);
+
+  const JERSEY_FORM_URL = "https://forms.gle/yVzduC8FXqv6MHMD7";
 
   const jerseyDesigns = [
     {
@@ -69,12 +69,14 @@ const JerseyDesigns = () => {
             <br /> <span className="text-amber-400">Note:</span> Jersey is
             mandatory for participation in all events.
           </p>
-          <button
-            onClick={() => navigate("/jersey")}
+          <a
+            href={JERSEY_FORM_URL}
+            target="_blank"
+            rel="noopener noreferrer"
             className="inline-flex items-center gap-2 px-6 py-3 bg-amber-500 hover:bg-amber-600 text-slate-900 font-semibold rounded-lg transition-all duration-300"
           >
             Purchase Jersey
-          </button>
+          </a>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 max-w-7xl mx-auto">
@@ -87,9 +89,11 @@ const JerseyDesigns = () => {
                   : "opacity-0 translate-y-10"
               }`}
             >
-              <button
-                onClick={() => navigate("/jersey")}
-                className="w-full h-full bg-slate-800 border border-slate-700 rounded-lg overflow-hidden hover:border-amber-400 transition-all duration-300 group cursor-pointer"
+              <a
+                href={JERSEY_FORM_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full h-full bg-slate-800 border border-slate-700 rounded-lg overflow-hidden hover:border-amber-400 transition-all duration-300 group cursor-pointer flex flex-col"
               >
                 <div className="relative overflow-hidden bg-slate-700 aspect-[3/4]">
                   <img
@@ -106,7 +110,7 @@ const JerseyDesigns = () => {
                     {jersey.department}
                   </p>
                 </div>
-              </button>
+              </a>
             </div>
           ))}
         </div>
